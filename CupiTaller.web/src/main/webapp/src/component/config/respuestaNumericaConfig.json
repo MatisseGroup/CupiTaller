@@ -1,0 +1,9 @@
+{
+    "displayName" : "RespuestaNumerica",
+    "name" : "respuestaNumerica",
+    "templateName" : "respuestaNumerica",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/RespuestaNumerica",
+    "el" : "#main"
+}

@@ -1,0 +1,9 @@
+{
+    "displayName" : "EncuestaMonitor",
+    "name" : "encuestaMonitor",
+    "templateName" : "encuestaMonitor",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/EncuestaMonitor",
+    "el" : "#main"
+}

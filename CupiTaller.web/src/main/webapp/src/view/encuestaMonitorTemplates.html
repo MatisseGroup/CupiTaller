@@ -1,0 +1,58 @@
+<script type="text/template" id="encuestaMonitorList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Fecha</th>
+		 <th>Usuario Encuestado</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(encuestaMonitors, function(encuestaMonitor) { %>
+    <tr>
+		<td><%= htmlEncode(encuestaMonitor.getDisplay('name')) %></td>
+		<td><%= htmlEncode(encuestaMonitor.getDisplay('fecha')) %></td>
+		<td><%= htmlEncode(encuestaMonitor.getDisplay('usuarioEncuestado')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-encuestaMonitor-edit',{id:<%= encuestaMonitor.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-encuestaMonitor-delete',{id:<%= encuestaMonitor.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="encuestaMonitor">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-encuestaMonitorForm">
+    <% if(encuestaMonitor.id) {%>
+    <input type="hidden" name="id" value="<%= encuestaMonitor.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= encuestaMonitor.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="fecha">Fecha</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fecha').datepicker({autoclose:true});
+        	$('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= encuestaMonitor.get('fecha') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+		<label for="usuarioEncuestado">Usuario Encuestado</label>
+    	<input type="text" class="form-control" id="usuarioEncuestado" name="usuarioEncuestado" placeholder="Enter value" value="<%= encuestaMonitor.get('usuarioEncuestado') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

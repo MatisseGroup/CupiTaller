@@ -1,0 +1,48 @@
+<script type="text/template" id="respuestaAbiertaList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Contenido</th>
+		 <th>Name</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(respuestaAbiertas, function(respuestaAbierta) { %>
+    <tr>
+		<td><%= htmlEncode(respuestaAbierta.getDisplay('contenido')) %></td>
+		<td><%= htmlEncode(respuestaAbierta.getDisplay('name')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-respuestaAbierta-edit',{id:<%= respuestaAbierta.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-respuestaAbierta-delete',{id:<%= respuestaAbierta.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="respuestaAbierta">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-respuestaAbiertaForm">
+    <% if(respuestaAbierta.id) {%>
+    <input type="hidden" name="id" value="<%= respuestaAbierta.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="contenido">Contenido</label>
+    	<input type="text" class="form-control" id="contenido" name="contenido" placeholder="Enter value" value="<%= respuestaAbierta.get('contenido') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= respuestaAbierta.get('name') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

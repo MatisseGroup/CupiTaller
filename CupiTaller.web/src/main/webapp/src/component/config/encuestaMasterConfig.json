@@ -1,0 +1,11 @@
+{
+    "displayName" : "Encuesta",
+    "name" : "encuesta",
+    "templateName" : "encuesta",
+    "url" : "encuesta.html",
+    "server": "localhost:8080",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/EncuestaMaster",
+    
+    "el" : "#main"
+}

@@ -1,0 +1,9 @@
+{
+    "displayName" : "Pregunta",
+    "name" : "pregunta",
+    "templateName" : "pregunta",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/Pregunta",
+    "el" : "#main"
+}
