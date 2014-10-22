@@ -1,0 +1,9 @@
+{
+    "displayName" : "Sesion",
+    "name" : "sesion",
+    "templateName" : "sesion",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/Sesion",
+    "el" : "#main"
+}

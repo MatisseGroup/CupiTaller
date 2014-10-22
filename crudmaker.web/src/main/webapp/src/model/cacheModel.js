@@ -7,7 +7,7 @@ define([], function() {
             if(this.validate){
                 var val=this.validate(this.attributes,options);
                 if(val && val!=''){
-                    this.trigger('invalid', {validationError:val});
+                    this.trigger('invalid', {event: 'validation', validationError: val});
                     return;
                 }
             }
@@ -58,7 +58,14 @@ define([], function() {
                 this.cacheListIsSet = true;
             }
             if (options.success) {
-                options.success();
+            	var resp = {
+                    state: {
+                        currentPage: 1,
+                        totalPages: 1,
+                        totalRecords: this.cacheModels.length
+                    }
+                };
+                options.success(resp);
             }
         },
         get: function(id) {
@@ -73,7 +80,11 @@ define([], function() {
                 this.deletedModels.push(model);
             }
             Backbone.Collection.prototype.remove.call(this, model, options);
-        }
+        },
+		reset: function(params){
+			Backbone.Collection.prototype.reset.call(this, params);
+			this.deletedModels = [];
+		}
     };
 
 });

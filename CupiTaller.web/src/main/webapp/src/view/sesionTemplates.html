@@ -1,0 +1,45 @@
+<script type="text/template" id="sesion">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-sesionForm">
+    <% if(sesion.id) {%>
+    <input type="hidden" name="id" value="<%= sesion.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= sesion.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="estado">Estado</label>
+    	<input type="text" class="form-control" id="estado" name="estado" placeholder="Enter value" value="<%= sesion.get('estado') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="fecha">Fecha</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fecha').datepicker({autoclose:true});
+        	$('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= sesion.get('fecha') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+ 
+			<label for="estudianteidId">Estudiante Id</label> 
+            <select class="form-control" id="estudianteId" name="estudianteId">
+			  <option value="">None</option>
+            <% estudiante.each(function(estudianteid) { %> 
+              <option value="<%=estudianteid.get('id')%>" <% if(sesion.get('estudianteId')==estudianteid.get('id')) {%>selected<%}%> ><%=estudianteid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+		<div class="form-group" >
+ 
+			<label for="monitoridId">Monitor Id</label> 
+            <select class="form-control" id="monitorId" name="monitorId">
+			  <option value="">None</option>
+            <% monitor.each(function(monitorid) { %> 
+              <option value="<%=monitorid.get('id')%>" <% if(sesion.get('monitorId')==monitorid.get('id')) {%>selected<%}%> ><%=monitorid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

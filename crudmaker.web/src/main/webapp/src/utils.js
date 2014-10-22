@@ -47,7 +47,7 @@ define(['App', 'controller/messageController'], function(App, Messages) {
          *  
          */
         randomInteger: function() {
-            return  _.random(0, 2000) + "";
+            return  _.random(1001, 100000) + "";
         },
         convertToModel: function(modelClass, objectList) {
             var models = [];
@@ -62,20 +62,26 @@ define(['App', 'controller/messageController'], function(App, Messages) {
             return modelClass.extend(App.Model.CacheModel);
         },
         createCacheList: function(modelClass, listClass, initialList) {
-            var cacheModel = this.createCacheModel(modelClass);
+            //var cacheModel = this.createCacheModel(modelClass);
             var listModel = App.Model.CacheListModel;
-            listModel.model = cacheModel;
+            listModel.model = modelClass;
             listModel.deletedModels = [];
             listModel.cacheModels = initialList;
             return listClass.extend(listModel);
         },
+		fillCacheList: function (name, destModel, deletedRecords, updatedRecords, createdRecords) {
+			destModel.set('list' + name, []);
+			destModel.set('create' + name, createdRecords);
+			destModel.set('update' + name, updatedRecords);
+			destModel.set('delete' + name, deletedRecords);
+		},
         getComponentList: function(componentName, callBack, aliasName) {
             var self = this;
             if (!this.cache[componentName]) {
                 require(["component/" + componentName], function(componentDef) {
                     var component = new componentDef();
                     component.initialize();
-                    var model = new component.listModel();
+                    var model = new component.listModelClass();
                     model.fetch({
                         success: function() {
                             self.cache[componentName] = model;

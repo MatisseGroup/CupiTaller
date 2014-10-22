@@ -1,9 +1,0 @@
-{
-    "displayName" : "RespuestaAbierta",
-    "name" : "respuestaAbierta",
-    "templateName" : "respuestaAbierta",
-    "url" : "user.html",
-    "server": "localhost:8080",
-    "context": "/CupiTaller.web/webresources/RespuestaAbierta",
-    "el" : "#main"
-}

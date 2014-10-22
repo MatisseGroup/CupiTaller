@@ -1,9 +1,0 @@
-{
-    "displayName" : "EncuestaEstudiante",
-    "name" : "encuestaEstudiante",
-    "templateName" : "encuestaEstudiante",
-    "url" : "user.html",
-    "server": "localhost:8080",
-    "context": "/CupiTaller.web/webresources/EncuestaEstudiante",
-    "el" : "#main"
-}

@@ -1,6 +1,6 @@
 define([], function() {
     App.Model._PreguntaMasterModel = Backbone.Model.extend({
-		initialize: function() {
+     	initialize: function() {
             this.on('invalid', function(model,error) {
                 Backbone.trigger('pregunta-master-model-error', error);
             });

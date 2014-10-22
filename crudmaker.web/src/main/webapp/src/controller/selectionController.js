@@ -54,6 +54,9 @@
         },
         addSelectionList: function(params) {
             var selectedIds = $('#addForm').serializeObject();
+            if(!Array.isArray(selectedIds.selection)){
+            	selectedIds.selection = [selectedIds.selection];
+            }
             var resp = new Array();
             
             _.each(this.list.models,function(m){

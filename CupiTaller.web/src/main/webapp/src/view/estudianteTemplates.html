@@ -1,0 +1,22 @@
+<script type="text/template" id="estudiante">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-estudianteForm">
+    <% if(estudiante.id) {%>
+    <input type="hidden" name="id" value="<%= estudiante.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= estudiante.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+	    <label>
+    	  <input id="activo" name="activo" value="true" type="checkbox" <%= estudiante.get('activo')?'checked':'' %>> Activo
+    	</label>
+		</div>
+		<div class="form-group" >
+		<label for="usuario">Usuario</label>
+    	<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Enter value" value="<%= estudiante.get('usuario') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 
