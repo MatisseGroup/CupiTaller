@@ -48,6 +48,7 @@ public abstract class _EstudianteConverter {
 					dto.setId(entity.getId());
 					dto.setActivo(entity.getActivo());
 					dto.setUsuario(entity.getUsuario());
+					dto.setCarrera(entity.getCarrera());
 			return dto;
 		}else{
 			return null;
@@ -64,6 +65,8 @@ public abstract class _EstudianteConverter {
 					entity.setActivo(dto.getActivo());
 			
 					entity.setUsuario(dto.getUsuario());
+			
+					entity.setCarrera(dto.getCarrera());
 			
 			return entity;
 		}else {

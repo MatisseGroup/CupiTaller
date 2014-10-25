@@ -31,7 +31,8 @@ define([], function() {
  
 		 'name' : '' ,  
 		 'activo' :  false  ,  
-		 'usuario' : ''        },
+		 'usuario' : '' ,  
+		 'carrera' : ''        },
         initialize: function() {
           var self = this;
           this.on('invalid',function(error){

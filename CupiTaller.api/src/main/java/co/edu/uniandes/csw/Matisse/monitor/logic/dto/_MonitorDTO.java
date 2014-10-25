@@ -50,6 +50,9 @@ public abstract class _MonitorDTO {
 	
 
 	private Integer puntosNegativos;
+	
+
+	private String carrera;
 
 
 
@@ -95,6 +98,15 @@ public abstract class _MonitorDTO {
  
 	public void setPuntosNegativos(Integer puntosnegativos) {
 		this.puntosNegativos = puntosnegativos;
+	}
+
+
+	public String getCarrera() {
+		return carrera;
+	}
+ 
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
 	}
 	
 }

@@ -45,6 +45,7 @@ public abstract class _EstudianteEntity {
 	private Long id;
 	private Boolean activo;
 	private String usuario;
+	private String carrera;
 
 	public String getName(){
 		return name;
@@ -73,5 +74,12 @@ public abstract class _EstudianteEntity {
 	
 	public void setUsuario(String usuario){
 		this.usuario = usuario;
+	}
+	public String getCarrera(){
+		return carrera;
+	}
+	
+	public void setCarrera(String carrera){
+		this.carrera = carrera;
 	}
 }

@@ -49,6 +49,12 @@ public abstract class _SesionDTO {
 	private String fecha;
 	
 
+	private Integer semanaAnual;
+	
+
+	private String dia;
+	
+
 	private Long estudianteId;
 	
 
@@ -89,6 +95,24 @@ public abstract class _SesionDTO {
  
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+
+	public Integer getSemanaAnual() {
+		return semanaAnual;
+	}
+ 
+	public void setSemanaAnual(Integer semanaanual) {
+		this.semanaAnual = semanaanual;
+	}
+
+
+	public String getDia() {
+		return dia;
+	}
+ 
+	public void setDia(String dia) {
+		this.dia = dia;
 	}
 
 

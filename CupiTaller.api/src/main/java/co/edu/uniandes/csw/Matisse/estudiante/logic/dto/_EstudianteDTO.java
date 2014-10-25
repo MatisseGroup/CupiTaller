@@ -47,6 +47,9 @@ public abstract class _EstudianteDTO {
 	
 
 	private String usuario;
+	
+
+	private String carrera;
 
 
 
@@ -83,6 +86,15 @@ public abstract class _EstudianteDTO {
  
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+
+	public String getCarrera() {
+		return carrera;
+	}
+ 
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
 	}
 	
 }

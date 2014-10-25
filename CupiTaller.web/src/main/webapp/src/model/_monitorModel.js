@@ -32,7 +32,8 @@ define([], function() {
 		 'name' : '' ,  
 		 'activo' :  false  ,  
 		 'usuario' : '' ,  
-		 'puntosNegativos' : ''        },
+		 'puntosNegativos' : '' ,  
+		 'carrera' : ''        },
         initialize: function() {
           var self = this;
           this.on('invalid',function(error){

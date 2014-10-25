@@ -53,6 +53,8 @@ public abstract class _SesionConverter {
 			    if(entity.getFecha() != null){
 					dto.setFecha(DATE_FORMAT.format(entity.getFecha()));
 				}	
+					dto.setSemanaAnual(entity.getSemanaAnual());
+					dto.setDia(entity.getDia());
 					dto.setEstudianteId(entity.getEstudianteId());
 					dto.setMonitorId(entity.getMonitorId());
 			return dto;
@@ -78,6 +80,10 @@ public abstract class _SesionConverter {
 				  } catch (Exception ex) {
                         Logger.getLogger(_SesionConverter.class.getName()).log(Level.SEVERE, null, ex);
                   }	
+			
+					entity.setSemanaAnual(dto.getSemanaAnual());
+			
+					entity.setDia(dto.getDia());
 			
 					entity.setEstudianteId(dto.getEstudianteId());
 			

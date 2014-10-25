@@ -46,6 +46,7 @@ public abstract class _MonitorEntity {
 	private Boolean activo;
 	private String usuario;
 	private Integer puntosNegativos;
+	private String carrera;
 
 	public Long getId(){
 		return id;
@@ -81,5 +82,12 @@ public abstract class _MonitorEntity {
 	
 	public void setPuntosNegativos(Integer puntosNegativos){
 		this.puntosNegativos = puntosNegativos;
+	}
+	public String getCarrera(){
+		return carrera;
+	}
+	
+	public void setCarrera(String carrera){
+		this.carrera = carrera;
 	}
 }

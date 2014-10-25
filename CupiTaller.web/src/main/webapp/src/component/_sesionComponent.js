@@ -35,6 +35,8 @@ define(['component/_CRUDComponent', 'model/sesionModel', 'controller/sesionContr
         	this.listComponent.addColumn('name','Name');
         	this.listComponent.addColumn('estado','Estado');
         	this.listComponent.addColumn('fecha','Fecha');
+        	this.listComponent.addColumn('semanaAnual','Semana Anual');
+        	this.listComponent.addColumn('dia','Dia');
         	this.listComponent.addColumn('estudianteId','Estudiante Id');
         	this.listComponent.addColumn('monitorId','Monitor Id');
         }

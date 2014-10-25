@@ -35,6 +35,7 @@ define(['component/_CRUDComponent', 'model/estudianteModel', 'controller/estudia
         	this.listComponent.addColumn('name','Name');
         	this.listComponent.addColumn('activo','Activo');
         	this.listComponent.addColumn('usuario','Usuario');
+        	this.listComponent.addColumn('carrera','Carrera');
         }
     });
     return App.Component._EstudianteComponent;

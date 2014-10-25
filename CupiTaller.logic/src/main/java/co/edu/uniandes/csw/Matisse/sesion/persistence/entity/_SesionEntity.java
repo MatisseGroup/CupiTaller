@@ -46,6 +46,8 @@ public abstract class _SesionEntity {
 	private String estado;
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
+	private Integer semanaAnual;
+	private String dia;
 	private Long estudianteId;
 	private Long monitorId;
 
@@ -76,6 +78,20 @@ public abstract class _SesionEntity {
 	
 	public void setFecha(Date fecha){
 		this.fecha = fecha;
+	}
+	public Integer getSemanaAnual(){
+		return semanaAnual;
+	}
+	
+	public void setSemanaAnual(Integer semanaAnual){
+		this.semanaAnual = semanaAnual;
+	}
+	public String getDia(){
+		return dia;
+	}
+	
+	public void setDia(String dia){
+		this.dia = dia;
 	}
 	public Long getEstudianteId(){
 		return estudianteId;

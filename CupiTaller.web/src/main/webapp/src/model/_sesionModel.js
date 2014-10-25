@@ -32,6 +32,8 @@ define([], function() {
 		 'name' : '' ,  
 		 'estado' : '' ,  
 		 'fecha' : '' ,  
+		 'semanaAnual' : '' ,  
+		 'dia' : '' ,  
 		 'estudianteId' : '' ,  
 		 'monitorId' : ''        },
         initialize: function() {

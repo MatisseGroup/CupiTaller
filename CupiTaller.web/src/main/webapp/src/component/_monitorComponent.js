@@ -36,6 +36,7 @@ define(['component/_CRUDComponent', 'model/monitorModel', 'controller/monitorCon
         	this.listComponent.addColumn('activo','Activo');
         	this.listComponent.addColumn('usuario','Usuario');
         	this.listComponent.addColumn('puntosNegativos','Puntos Negativos');
+        	this.listComponent.addColumn('carrera','Carrera');
         }
     });
     return App.Component._MonitorComponent;
