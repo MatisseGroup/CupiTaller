@@ -44,8 +44,8 @@ public abstract class _EstudianteConverter {
 	public static EstudianteDTO entity2PersistenceDTO(EstudianteEntity entity){
 		if (entity != null) {
 			EstudianteDTO dto = new EstudianteDTO();
-					dto.setName(entity.getName());
 					dto.setId(entity.getId());
+					dto.setName(entity.getName());
 					dto.setActivo(entity.getActivo());
 					dto.setUsuario(entity.getUsuario());
 					dto.setCarrera(entity.getCarrera());
@@ -58,9 +58,9 @@ public abstract class _EstudianteConverter {
 	public static EstudianteEntity persistenceDTO2Entity(EstudianteDTO dto){
 		if(dto!=null){
 			EstudianteEntity entity=new EstudianteEntity();
-					entity.setName(dto.getName());
-			
 					entity.setId(dto.getId());
+			
+					entity.setName(dto.getName());
 			
 					entity.setActivo(dto.getActivo());
 			

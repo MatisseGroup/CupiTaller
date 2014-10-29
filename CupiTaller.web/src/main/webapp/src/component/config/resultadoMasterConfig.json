@@ -1,0 +1,11 @@
+{
+    "displayName" : "Resultado",
+    "name" : "resultado",
+    "templateName" : "resultado",
+    "url" : "resultado.html",
+    "server": "localhost:8080",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/ResultadoMaster",
+    
+    "el" : "#main"
+}

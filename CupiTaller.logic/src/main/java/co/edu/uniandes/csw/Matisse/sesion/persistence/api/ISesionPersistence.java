@@ -28,6 +28,14 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.persistence.api;
 
+import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
+import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.List;
+
 public interface ISesionPersistence extends _ISesionPersistence {
+
+    public List<EntradasDTO> darEstadisticaPorSemana(int semana);
+
+    public SesionPageDTO darSesionesPorSemana(Integer page, Integer maxRecords, Integer semana);
 
 }

@@ -28,19 +28,40 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.service;
 
+import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
+import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/Sesion")
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SesionService extends _SesionService {
+    @Context
+    UriInfo uriInfo;
 
-
+    @GET
+    @Path("estadistica")
+    public List<EntradasDTO> darEstadisticasPorSemana(@QueryParam("semanaAnual")int semana) {
+        System.out.println("entro servicio con semana: " + semana);
+        return sesionLogicService.darEstadisticaPorSemana(semana);
+    }
+    
+    @GET
+    @Path("sesionesSemana")
+    public SesionPageDTO getSesionesSemana(@QueryParam("semanaAnual")Integer semana,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+	System.out.println("entro sesiones por semana");
+        return sesionLogicService.getSesionesSemana(page, maxRecords, semana);
+    }
 }

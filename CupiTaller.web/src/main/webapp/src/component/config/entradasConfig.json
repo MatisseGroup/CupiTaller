@@ -1,0 +1,9 @@
+{
+    "displayName" : "Entradas",
+    "name" : "entradas",
+    "templateName" : "entradas",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/CupiTaller.web/webresources/Entradas",
+    "el" : "#main"
+}

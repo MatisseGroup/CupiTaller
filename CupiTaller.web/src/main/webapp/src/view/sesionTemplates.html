@@ -1,37 +1,40 @@
 <script type="text/template" id="sesion">
     <div class="form-group">
-    <form role="form" id="<%= componentId %>-sesionForm">
-    <% if(sesion.id) {%>
-    <input type="hidden" name="id" value="<%= sesion.id %>"/>
-    <% }%>
+        <form role="form" id="<%= componentId %>-sesionForm">
+            <% if(sesion.id) {%>
+                <input type="hidden" name="id" value="<%= sesion.id %>"/>
+                <% }%>
+                <h3>Buscar por n&uacute;mero de semana</h3>
+                <label for="semanaAnual">Seleccione n&uacute;mero de semana</label> 
+                <input id= "semanaAnual" name="semanaAnual" class="form-control" type="text"/>
+                <br>
                 <div class="form-group" >
                     <h3>Buscar por mes</h3>
                     <label for="mes">Seleccione un mes</label> 
                     <select class="form-control" id="mes" name="mes">
-                                  <option value="ENE">Enero</option>
-                                  <option value="FEB">Febrero</option>
-                                  <option value="MAR">Marzo</option>
-                                  <option value="ABR">Abril</option>
-                                  <option value="MAY">Mayo</option>
-                                  <option value="JUN">Junio</option>
-                                  <option value="JUL">Julio</option>
-                                  <option value="AGO">Agosto</option>
-                                  <option value="SEP">Septiembre</option>
-                                  <option value="OCT">Octubre</option>        
-                                  <option value="NOV">Noviembre</option>
-                                  <option value="DIC">Diciembre</option>                         
-                    </select>  
-		<br>
-                <h3>Buscar por semana</h3>
-		<div class="form-group" >
-			<label for="fecha">Seleccione una semana</label>
-    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
-    		<%= '<scr'+'ipt>' %>
-        	$('#fecha').datepicker({autoclose:true});
-        	$('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= sesion.get('fecha') %>"));
-    		<%= '</scr'+'ipt>' %>
-		</div>
-
-    </form>
+                      <option value="ENE">Enero</option>
+                      <option value="FEB">Febrero</option>
+                      <option value="MAR">Marzo</option>
+                      <option value="ABR">Abril</option>
+                      <option value="MAY">Mayo</option>
+                      <option value="JUN">Junio</option>
+                      <option value="JUL">Julio</option>
+                      <option value="AGO">Agosto</option>
+                      <option value="SEP">Septiembre</option>
+                      <option value="OCT">Octubre</option>        
+                      <option value="NOV">Noviembre</option>
+                      <option value="DIC">Diciembre</option>                         
+                    </select> 
+                  <br>
+                  <h3>Buscar por semana</h3>
+                  <div class="form-group" >
+                     <label for="fecha">Seleccione una fecha</label>
+                     <input id = "fecha" type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
+                     <%= '<scr'+'ipt>' %>
+                     $('#fecha').datepicker({autoclose:true});
+                     $('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= sesion.get('fecha') %>"));
+                     <%= '</scr'+'ipt>' %>
+                 </div>
+        </form>
     </div>
 </script> 

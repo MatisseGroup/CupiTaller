@@ -28,6 +28,14 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.logic.api;
 
+import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
+import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.List;
+
 public interface ISesionLogicService extends _ISesionLogicService {
+
+    public List<EntradasDTO> darEstadisticaPorSemana(int semana);
+
+    public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana);
 
 }

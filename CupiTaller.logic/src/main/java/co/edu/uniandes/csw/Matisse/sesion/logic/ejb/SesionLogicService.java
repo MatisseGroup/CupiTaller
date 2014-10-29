@@ -28,6 +28,7 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.logic.ejb;
 
+import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless; 
@@ -36,10 +37,20 @@ import javax.inject.Inject;
 import javax.enterprise.inject.Default;
 
 import co.edu.uniandes.csw.Matisse.sesion.logic.api.ISesionLogicService;
+import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.List;
 
 @Default
 @Stateless
 @LocalBean
 public class SesionLogicService extends _SesionLogicService implements ISesionLogicService {
+
+    public List<EntradasDTO> darEstadisticaPorSemana(int semana) {
+        return persistance.darEstadisticaPorSemana(semana);
+    }
+
+    public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana) {
+        return persistance.darSesionesPorSemana(page,maxRecords,semana);
+    }
 
 }

@@ -1,0 +1,21 @@
+<script type="text/template" id="entradas">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-entradasForm">
+    <% if(entradas.id) {%>
+    <input type="hidden" name="id" value="<%= entradas.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="label">Label</label>
+    	<input type="text" class="form-control" id="label" name="label" placeholder="Enter value" value="<%= entradas.get('label') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="value">Value</label>
+    	<input type="text" class="form-control" id="value" name="value" placeholder="Enter value" value="<%= entradas.get('value') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= entradas.get('name') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 
