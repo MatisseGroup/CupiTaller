@@ -4,50 +4,34 @@
     <% if(sesion.id) {%>
     <input type="hidden" name="id" value="<%= sesion.id %>"/>
     <% }%>
+                <div class="form-group" >
+                    <h3>Buscar por mes</h3>
+                    <label for="mes">Seleccione un mes</label> 
+                    <select class="form-control" id="mes" name="mes">
+                                  <option value="ENE">Enero</option>
+                                  <option value="FEB">Febrero</option>
+                                  <option value="MAR">Marzo</option>
+                                  <option value="ABR">Abril</option>
+                                  <option value="MAY">Mayo</option>
+                                  <option value="JUN">Junio</option>
+                                  <option value="JUL">Julio</option>
+                                  <option value="AGO">Agosto</option>
+                                  <option value="SEP">Septiembre</option>
+                                  <option value="OCT">Octubre</option>        
+                                  <option value="NOV">Noviembre</option>
+                                  <option value="DIC">Diciembre</option>                         
+                    </select>  
+		<br>
+                <h3>Buscar por semana</h3>
 		<div class="form-group" >
-		<label for="name">Name</label>
-    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= sesion.get('name') %>"/>	
-		</div>
-		<div class="form-group" >
-		<label for="estado">Estado</label>
-    	<input type="text" class="form-control" id="estado" name="estado" placeholder="Enter value" value="<%= sesion.get('estado') %>"/>	
-		</div>
-		<div class="form-group" >
-			<label for="fecha">Fecha</label>
+			<label for="fecha">Seleccione una semana</label>
     		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
     		<%= '<scr'+'ipt>' %>
         	$('#fecha').datepicker({autoclose:true});
         	$('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= sesion.get('fecha') %>"));
     		<%= '</scr'+'ipt>' %>
 		</div>
-		<div class="form-group" >
-		<label for="semanaAnual">Semana Anual</label>
-    	<input type="text" class="form-control" id="semanaAnual" name="semanaAnual" placeholder="Enter value" value="<%= sesion.get('semanaAnual') %>"/>	
-		</div>
-		<div class="form-group" >
-		<label for="dia">Dia</label>
-    	<input type="text" class="form-control" id="dia" name="dia" placeholder="Enter value" value="<%= sesion.get('dia') %>"/>	
-		</div>
-		<div class="form-group" >
- 
-			<label for="estudianteidId">Estudiante Id</label> 
-            <select class="form-control" id="estudianteId" name="estudianteId">
-			  <option value="">None</option>
-            <% estudiante.each(function(estudianteid) { %> 
-              <option value="<%=estudianteid.get('id')%>" <% if(sesion.get('estudianteId')==estudianteid.get('id')) {%>selected<%}%> ><%=estudianteid.get('name')%></option>
-            <% }); %>                
-            </select>  
-		</div>
-		<div class="form-group" >
- 
-			<label for="monitoridId">Monitor Id</label> 
-            <select class="form-control" id="monitorId" name="monitorId">
-			  <option value="">None</option>
-            <% monitor.each(function(monitorid) { %> 
-              <option value="<%=monitorid.get('id')%>" <% if(sesion.get('monitorId')==monitorid.get('id')) {%>selected<%}%> ><%=monitorid.get('name')%></option>
-            <% }); %>                
-            </select>  
-		</div>
+
     </form>
     </div>
 </script> 

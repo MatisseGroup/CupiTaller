@@ -28,7 +28,79 @@
 define(['component/_sesionComponent'], function() {
     App.Component.SesionComponent = App.Component._SesionComponent.extend({
         postInit: function(){
-			
+           
+           //Borra los botones por defecto
+            this.toolbarComponent.removeButton('create');
+            this.toolbarComponent.removeButton('refresh');
+            this.toolbarComponent.removeButton('search');
+            this.toolbarComponent.removeButton('print');
+            
+            //Botones del toolbar
+            this.toolbarComponent.addButton({
+                name: 'buscar',
+                 displayName: 'Buscar',
+                 icon: 'glyphicon-search',
+                 show: true
+             },
+             this.buscar,this);
+             
+             this.toolbarComponent.addButton({
+                name: 'comparar',
+                 displayName: 'Comparar',
+                 icon: 'glyphicon-th-large',
+                 show: true
+             });
+             
+             this.toolbarComponent.addButton({
+                name: 'reporte',
+                 displayName: 'Generar Reporte',
+                 icon: 'glyphicon-stats',
+                 show: true
+             });
+             
+             //Sub-botones toolbar
+            this.toolbarComponent.addButton({
+                name: 'realizar-busqueda',
+                displayName: 'Buscar',
+                icon: 'glyphicon-search',
+                show: false
+            },
+            this.realizarBusqueda,
+            this);
+            this.toolbarComponent.addButton({
+                name: 'cancelar-busqueda',
+                displayName: 'Cancelar',
+                icon: 'glyphicon-remove-sign',
+                show: false
+            },
+            function(){
+                this.toolbarComponent.showButton('buscar');
+                this.toolbarComponent.showButton('comparar');
+                this.toolbarComponent.showButton('reporte');
+                this.toolbarComponent.hideButton('realizar-busqueda');
+                this.toolbarComponent.hideButton('cancelar-busqueda');
+                this.toolbarComponent.render();
+                this.componentController.list(null, this.list, this);
+            },
+            this);      
+        },
+        buscar: function(){
+            this.toolbarComponent.hideButton('buscar');
+            this.toolbarComponent.hideButton('comparar');
+            this.toolbarComponent.hideButton('reporte');
+            this.toolbarComponent.showButton('realizar-busqueda');
+            this.toolbarComponent.showButton('cancelar-busqueda');
+            this.toolbarComponent.render();
+            this.componentController.create();
+        },
+        realizarBusqueda: function(){
+            this.toolbarComponent.showButton('buscar');
+            this.toolbarComponent.showButton('comparar');
+            this.toolbarComponent.showButton('reporte');
+            this.toolbarComponent.hideButton('realizar-busqueda');
+            this.toolbarComponent.hideButton('cancelar-busqueda');
+            this.toolbarComponent.render();
+            this.componentController.buscar();
         }
     });
     return App.Component.SesionComponent;
