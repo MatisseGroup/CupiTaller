@@ -28,6 +28,7 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.persistence;
 
+import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -105,9 +106,9 @@ public class SesionPersistenceTest {
 		for(int i=0;i<3;i++){
 			SesionEntity entity=new SesionEntity();
 			entity.setName(generateRandom(String.class));
-			entity.setEstado(generateRandom(String.class));
+			entity.setEstado("Cancelado");
 			entity.setFecha(generateRandom(Date.class));
-			entity.setSemanaAnual(generateRandom(Integer.class));
+			entity.setSemanaAnual(32);
 			entity.setDia(generateRandom(String.class));
 			entity.setEstudianteId(generateRandom(Long.class));
 			entity.setMonitorId(generateRandom(Long.class));
@@ -121,7 +122,7 @@ public class SesionPersistenceTest {
 		SesionDTO dto=new SesionDTO();
 		dto.setName(generateRandom(String.class));
 		dto.setEstado(generateRandom(String.class));
-dto.setFecha(generateRandomDate());
+                dto.setFecha(generateRandomDate());
 		dto.setSemanaAnual(generateRandom(Integer.class));
 		dto.setDia(generateRandom(String.class));
 		dto.setEstudianteId(generateRandom(Long.class));
@@ -135,7 +136,7 @@ dto.setFecha(generateRandomDate());
 		
 		Assert.assertEquals(dto.getName(), entity.getName());
 		Assert.assertEquals(dto.getEstado(), entity.getEstado());
-Assert.assertEquals(parseDate(dto.getFecha()), entity.getFecha());	
+                Assert.assertEquals(parseDate(dto.getFecha()), entity.getFecha());	
 		Assert.assertEquals(dto.getSemanaAnual(), entity.getSemanaAnual());
 		Assert.assertEquals(dto.getDia(), entity.getDia());
 		Assert.assertEquals(dto.getEstudianteId(), entity.getEstudianteId());
@@ -187,7 +188,7 @@ Assert.assertEquals(parseDate(dto.getFecha()), entity.getFecha());
 		dto.setId(entity.getId());
 		dto.setName(generateRandom(String.class));
 		dto.setEstado(generateRandom(String.class));
-dto.setFecha(generateRandomDate());
+                dto.setFecha(generateRandomDate());
 		dto.setSemanaAnual(generateRandom(Integer.class));
 		dto.setDia(generateRandom(String.class));
 		dto.setEstudianteId(generateRandom(Long.class));
@@ -201,7 +202,7 @@ dto.setFecha(generateRandomDate());
 		
 		Assert.assertEquals(dto.getName(), resp.getName());	
 		Assert.assertEquals(dto.getEstado(), resp.getEstado());	
-Assert.assertEquals(parseDate(dto.getFecha()), resp.getFecha());
+                Assert.assertEquals(parseDate(dto.getFecha()), resp.getFecha());
 		Assert.assertEquals(dto.getSemanaAnual(), resp.getSemanaAnual());	
 		Assert.assertEquals(dto.getDia(), resp.getDia());	
 		Assert.assertEquals(dto.getEstudianteId(), resp.getEstudianteId());	
@@ -241,5 +242,12 @@ Assert.assertEquals(parseDate(dto.getFecha()), resp.getFecha());
             Assert.assertTrue(found);
         }
 	}
-	
+        
+        @Test
+        public void darEstadisticasSemanaTest(){
+            List<EntradasDTO> list=sesionPersistence.darEstadisticaPorSemana(32);
+            Assert.assertEquals(list.size(), 1);
+            Assert.assertTrue(list.get(0).getValue()==3);
+            Assert.assertTrue(list.get(0).getLabel().equals("Cancelado"));
+        }
 }

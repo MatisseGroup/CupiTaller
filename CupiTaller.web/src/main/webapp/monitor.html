@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Monitor CRUD</title>
+        <title>Monitores CupiTaller</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/datepicker.css">
+        <!-- Timeline CSS -->
+        <link href="css/plugins/timeline.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/sb-admin-2.css" rel="stylesheet">
+    
+        <!-- Custom Fonts -->
+        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="./js/vendor/Chart.min.js"></script>
         <script>
             loadComponents = [
             {
                     name: 'component/monitorComponent', 
                     render: true,
-                    domElementId: 'main'
+                    domElementId: 'tabla'
             }
             ];
         </script>
+
         <script src="./js/vendor/jquery-1.9.1.js"></script>
         <script src="./js/vendor/bootstrap.min.js"></script>
         <script src="./js/vendor/underscore-min.js"></script>
         <script src="./js/vendor/backbone-min.js"></script>
         <script src="./js/vendor/backbone.paginator.min.js"></script>
         <script src="./js/vendor/bootstrap-datepicker.js"></script>
+
         <script data-main="src/main" src="./js/vendor/require.js"></script>
+        
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../../assets/js/html5shiv.js"></script>
@@ -30,7 +42,89 @@
     </head>
     <body>
         <div class="container">
-            <div id="main" ></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Observatorio CupiTaller</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="sesion.html">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><h2>Citas</h2></div>
+                                        <div>Ver citas esta semana</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>    
+                </div>
+                <div class="col-md-3">
+                    <a href="encuesta.html">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><h2>Encuestas</h2></div>
+                                        <div>Ver resultados</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>    
+                </div>
+                <div class="col-md-3">
+                    <a href="estadisticas.html">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><h2>Estadisticas</h2></div>
+                                        <div>Ver estad&iacute;sticas generales</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>    
+                </div>
+                <div class="col-md-3">
+                    <a href="monitor.html">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><h2>Monitores</h2></div>
+                                        <div>Administrar monitores</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>    
+                </div>
+            </div>
+            <div id="main">
+
+            </div> 
+            <div id="tabla">
+                
+            </div> 
         </div>
     </body>
 </html>
