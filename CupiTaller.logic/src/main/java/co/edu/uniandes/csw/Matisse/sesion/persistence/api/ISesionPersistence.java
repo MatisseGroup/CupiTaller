@@ -38,4 +38,6 @@ public interface ISesionPersistence extends _ISesionPersistence {
 
     public SesionPageDTO darSesionesPorSemana(Integer page, Integer maxRecords, Integer semana);
 
+    public Integer darUltimaSemana();
+
 }

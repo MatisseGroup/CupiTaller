@@ -88,4 +88,10 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
         response.setRecords(SesionConverter.entity2PersistenceDTOList(q.getResultList()));
         return response;
     }
+
+    public Integer darUltimaSemana() {
+        Query count = entityManager.createNativeQuery("select max(u.semanaAnual) from SesionEntity u");
+	Integer regCount = Integer.parseInt(count.getSingleResult().toString());
+        return regCount;
+    }
 }

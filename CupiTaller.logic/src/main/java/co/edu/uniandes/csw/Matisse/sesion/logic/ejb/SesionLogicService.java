@@ -53,4 +53,8 @@ public class SesionLogicService extends _SesionLogicService implements ISesionLo
         return persistance.darSesionesPorSemana(page,maxRecords,semana);
     }
 
+    public Integer darUltimaSemana() {
+        return persistance.darUltimaSemana();
+    }
+
 }

@@ -53,8 +53,12 @@ public class SesionService extends _SesionService {
 
     @GET
     @Path("estadistica")
-    public List<EntradasDTO> darEstadisticasPorSemana(@QueryParam("semanaAnual")int semana) {
-        System.out.println("entro servicio con semana: " + semana);
+    public List<EntradasDTO> darEstadisticasPorSemana(@QueryParam("semanaAnual")Integer semana) {
+        System.out.println("Semana: " + semana);
+        if(semana==null){
+            semana = sesionLogicService.darUltimaSemana();
+            System.out.println("Semana reasignada : " + semana);
+        }
         return sesionLogicService.darEstadisticaPorSemana(semana);
     }
     
