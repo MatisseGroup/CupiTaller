@@ -28,6 +28,30 @@
 
 package co.edu.uniandes.csw.Matisse.resultado.logic.dto;
 
+import co.edu.uniandes.csw.Matisse.grupo.logic.dto.GrupoDTO;
+import java.util.List;
+
 public class ResultadoDTO extends _ResultadoDTO {
 
+    public List<GrupoDTO> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(List<GrupoDTO> preguntas) {
+        this.preguntas = preguntas;
+    }
+
+    public Integer getContestadas() {
+        return contestadas;
+    }
+
+    public void setContestadas(Integer contestadas) {
+        this.contestadas = contestadas;
+    }
+    
+    private List<GrupoDTO> preguntas;
+    
+    private Integer contestadas;
+    
+    
 }

@@ -28,6 +28,9 @@
 
 package co.edu.uniandes.csw.Matisse.pregunta.logic.api;
 
+import co.edu.uniandes.csw.Matisse.respuesta.logic.dto.RespuestaDTO;
+import java.util.List;
+
 public interface IPreguntaLogicService extends _IPreguntaLogicService {
 
 }

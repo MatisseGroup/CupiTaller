@@ -28,6 +28,28 @@
 
 package co.edu.uniandes.csw.Matisse.pregunta.logic.dto;
 
-public class PreguntaDTO extends _PreguntaDTO {
+import co.edu.uniandes.csw.Matisse.opcion.dto.OpcionDTO;
+import java.util.List;
 
+public class PreguntaDTO extends _PreguntaDTO {
+    
+    private String pregunta;
+    
+    private List<OpcionDTO> opciones;
+
+    public List<OpcionDTO> getOpciones() {
+        return opciones;
+    }
+
+    public void setOpciones(List<OpcionDTO> opciones) {
+        this.opciones = opciones;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
 }

@@ -28,6 +28,13 @@
 
 package co.edu.uniandes.csw.Matisse.resultado.logic.api;
 
+import co.edu.uniandes.csw.Matisse.pregunta.logic.dto.PreguntaDTO;
+import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
+
 public interface IResultadoLogicService extends _IResultadoLogicService {
+
+    public ResultadoDTO listarPreguntas(Integer semana);
+
+    public PreguntaDTO respuestaAPregunta(Integer id);
 
 }
