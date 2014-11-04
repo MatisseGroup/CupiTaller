@@ -31,6 +31,8 @@ import javax.enterprise.inject.Alternative;
 import javax.inject.Singleton;
 
 import co.edu.uniandes.csw.Matisse.pregunta.logic.api.IPreguntaLogicService;
+import co.edu.uniandes.csw.Matisse.respuesta.logic.dto.RespuestaDTO;
+import java.util.List;
 @Singleton
 public class PreguntaMockLogicService extends _PreguntaMockLogicService implements IPreguntaLogicService {
 	
