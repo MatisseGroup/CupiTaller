@@ -28,6 +28,7 @@
 
 package co.edu.uniandes.csw.Matisse.resultado.logic.ejb;
 
+import co.edu.uniandes.csw.Matisse.pregunta.logic.dto.PreguntaDTO;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless; 
@@ -36,10 +37,19 @@ import javax.inject.Inject;
 import javax.enterprise.inject.Default;
 
 import co.edu.uniandes.csw.Matisse.resultado.logic.api.IResultadoLogicService;
+import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
 
 @Default
 @Stateless
 @LocalBean
 public class ResultadoLogicService extends _ResultadoLogicService implements IResultadoLogicService {
+
+    public ResultadoDTO listarPreguntas(Integer semana) {
+        return  persistance.listarPreguntas(semana);
+    }
+
+    public PreguntaDTO respuestaAPregunta(Integer id) {
+        return persistance.respuestaA(id);
+    }
 
 }

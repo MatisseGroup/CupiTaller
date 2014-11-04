@@ -36,10 +36,13 @@ import javax.inject.Inject;
 import javax.enterprise.inject.Default;
 
 import co.edu.uniandes.csw.Matisse.pregunta.logic.api.IPreguntaLogicService;
+import co.edu.uniandes.csw.Matisse.respuesta.logic.dto.RespuestaDTO;
+import java.util.List;
 
 @Default
 @Stateless
 @LocalBean
 public class PreguntaLogicService extends _PreguntaLogicService implements IPreguntaLogicService {
+
 
 }

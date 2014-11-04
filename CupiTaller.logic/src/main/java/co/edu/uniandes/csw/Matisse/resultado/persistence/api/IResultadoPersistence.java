@@ -28,6 +28,13 @@
 
 package co.edu.uniandes.csw.Matisse.resultado.persistence.api;
 
+import co.edu.uniandes.csw.Matisse.pregunta.logic.dto.PreguntaDTO;
+import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
+
 public interface IResultadoPersistence extends _IResultadoPersistence {
+
+    public ResultadoDTO listarPreguntas(Integer semana);
+
+    public PreguntaDTO respuestaA(Integer id);
 
 }
