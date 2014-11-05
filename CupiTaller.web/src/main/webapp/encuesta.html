@@ -22,7 +22,15 @@
         <script src="./js/vendor/backbone-min.js"></script>
         <script src="./js/vendor/backbone.paginator.min.js"></script>
         <script src="./js/vendor/bootstrap-datepicker.js"></script>
-
+        <script>
+            loadComponents = [
+            {
+                    name: 'component/resultadoComponent', 
+                    render: true,
+                    domElementId: 'tabla'
+            }
+            ];
+        </script>
         <script data-main="src/main" src="./js/vendor/require.js"></script>
         <script type="text/javascript" src="./js/vendor/myJs.js"></script>
         <script type="text/javascript">
