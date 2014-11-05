@@ -28,16 +28,12 @@
 
 package co.edu.uniandes.csw.Matisse.resultado.service;
 
-import co.edu.uniandes.csw.Matisse.pregunta.logic.dto.PreguntaDTO;
-import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/Resultado")
@@ -46,17 +42,5 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class ResultadoService extends _ResultadoService {
 
-    @GET
-    @Path("ListarPreguntas")
-    public ResultadoDTO listarPreguntas(@QueryParam("fecha")Integer semana){
-        System.err.println("conseguira todas las respuesta");
-        return resultadoLogicService.listarPreguntas(semana);
-    } 
-    
-    @GET
-    @Path("RespuestaA")
-    public PreguntaDTO respuestasAPregunta(@QueryParam("idPregunta ")Integer id){
-        System.err.println("Conseguir respuestas a esta pregunta");
-        return resultadoLogicService.respuestaAPregunta(id);
-    }
+
 }

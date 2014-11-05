@@ -29,6 +29,10 @@ define(['component/_monitorComponent'], function() {
     App.Component.MonitorComponent = App.Component._MonitorComponent.extend({
         postInit: function(){
 			
+            //Borra los botones por defecto
+            this.toolbarComponent.removeButton('create');
+            this.toolbarComponent.removeButton('refresh');
+            this.toolbarComponent.removeButton('print');
         }
     });
     return App.Component.MonitorComponent;
