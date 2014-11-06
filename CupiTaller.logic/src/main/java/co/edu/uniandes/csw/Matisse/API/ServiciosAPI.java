@@ -59,7 +59,7 @@ public class ServiciosAPI {
     // ----------------------------
     
     public static ServiciosAPI getInstance(){
-        return (instance == null) ? new ServiciosAPI():instance;
+        return (instance == null) ? instance = new ServiciosAPI():instance;
     }
 
     public static String parse(String jsonLine) {
