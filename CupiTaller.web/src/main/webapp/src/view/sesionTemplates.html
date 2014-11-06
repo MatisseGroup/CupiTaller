@@ -4,11 +4,13 @@
             <% if(sesion.id) {%>
                 <input type="hidden" name="id" value="<%= sesion.id %>"/>
                 <% }%>
+            <div class="form-group" >
                 <h3>Buscar por n&uacute;mero de semana</h3>
                 <label for="semanaAnual">Seleccione n&uacute;mero de semana</label> 
                 <input id= "semanaAnual" name="semanaAnual" class="form-control" type="text"/>
+            </div>
                 <br>
-                <div class="form-group" >
+                <!--<div class="form-group" >
                     <h3>Buscar por mes</h3>
                     <label for="mes">Seleccione un mes</label> 
                     <select class="form-control" id="mes" name="mes">
@@ -34,7 +36,7 @@
                      $('#fecha').datepicker({autoclose:true});
                      $('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= sesion.get('fecha') %>"));
                      <%= '</scr'+'ipt>' %>
-                 </div>
+                 </div>-->
         </form>
     </div>
 </script> 
