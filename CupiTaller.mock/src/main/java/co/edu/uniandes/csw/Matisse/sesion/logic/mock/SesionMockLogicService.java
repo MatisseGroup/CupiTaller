@@ -49,5 +49,10 @@ public class SesionMockLogicService extends _SesionMockLogicService implements I
     public Integer darUltimaSemana() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<EntradasDTO> darSemanas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 	
 }

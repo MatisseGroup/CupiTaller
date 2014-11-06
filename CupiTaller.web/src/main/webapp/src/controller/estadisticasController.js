@@ -119,4 +119,27 @@ function drawTable(div,titulo,x,y,labels,series){
        });  
 }
 
+function configurarSemanas(){
+  $.ajax({
+      url: '/CupiTaller.web/webresources/Sesion/opcionesSemana',
+      type: 'GET',
+      contentType: 'application/json',
+      success: function(data){
+        for(var i = 0; i<data.length;i++){
+          var option = document.createElement("option");
+          option.text = data[i].value;
+          option.value = data[i].value;
+          var select = document.getElementById("compararOpciones");
+          select.appendChild(option); 
+
+          var option2 = document.createElement("option");
+          option2.text = data[i].value;
+          option2.value = data[i].value;
+          var select2 = document.getElementById("opcionesSemana");
+          select2.appendChild(option2); 
+        }
+      }
+    });
+}
+
 

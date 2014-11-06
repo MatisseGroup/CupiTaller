@@ -57,5 +57,9 @@ public class SesionLogicService extends _SesionLogicService implements ISesionLo
     public Integer darUltimaSemana() {
         return persistance.darUltimaSemana();
     }
+    
+    public List<EntradasDTO>darSemanas(){
+        return persistance.darSemanas();
+    }
 
 }
