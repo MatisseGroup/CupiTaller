@@ -1,20 +1,25 @@
-<div class = "row">
-  <div class="col-md-2">
-    <ul class="nav nav-tab nav-stacked" role="tablist">
+<div class = "row ">
+  <div class="col-md-2 ">
+    <ul class="nav nav-tab nav-pills" role="tablist">
       <li role="presentation" class="active"><a href="#firstTab" role="tab" data-toggle="tab">Gr&aacute;fico por semana</a></li>
-      <li role="presentation" data-toggle="tab"><a href="#secondTab" role="tab" data-toggle="tab" onclick="compararSemanas(false); return false;">Comparar Semanas</a></li>
-      <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Encuesta 3</a></li>
+      <li role="presentation" data-toggle="tab" ><a href="#secondTab" role="tab" data-toggle="tab" onclick="compararSemanas(false); return false;">Comparar Semanas</a></li>
+     <!-- <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Encuesta 3</a></li> -->
     </ul>
   </div>
  
   <div class="tab-content col-md-10">
     <div class="tab-pane active" role="tabpanel" id="firstTab">
-      <form id="formSemana" role="form" >
-        <label for="semanaAnual">Ingrese un n&uacute;mero de semana</label>
-        <select name = "semanaAnual" id = "opcionesSemana"></select> 
-        <input type="submit" onclick="consultarEstadisticasSemana(true);return false;" value="Buscar" >
+      <div class="well row">
+      <form id="formSemana" role="form">
+        Seleccione una semana
+        <br>
+        <select class="form-control" name = "semanaAnual" id = "opcionesSemana"></select> 
+        <br>
+        <input type="submit" class="btn btn-default" onclick="consultarEstadisticasSemana(true);return false;" value="Buscar" >
       </form>
-      <div id="grafica" style="width:800px; height: 400px; margin: 0 auto">
+       </div>
+        
+      <div class ="row" id="grafica" style="width:900px; height: 400px; margin: 0 auto">
           
       </div>
       
@@ -22,18 +27,22 @@
 
     <div class="tab-pane" role="tabpanel" id="secondTab">
       <div class="row">
-        <div class="col-md-2">
-          <h4>Seleccione las semanas a comparar</h4>
-          <form id="formComparar">
+        <div class="well">
+          Seleccione las semanas a comparar
+          <br>
+          
+          <form id="formComparar" role="form">
             <select multiple class="form-control" name="semanas" id="compararOpciones">
 
             </select>
-            <input type="submit" value="comparar" onclick="compararSemanas(true);return false;"></input>
+              <br>
+            <input type="submit" class="btn btn-default" value="comparar" onclick="compararSemanas(true);return false;"></input>
           </form>
+          </div>
+       </div> 
+        <div class="row" id="graficaComparar">
         </div>
-        <div class="col-md-10" id="graficaComparar">
-        </div>
-      </div>
+      
     </div>
 
     <div class="tab-pane" role="tabpanel" id="thirdTab">
