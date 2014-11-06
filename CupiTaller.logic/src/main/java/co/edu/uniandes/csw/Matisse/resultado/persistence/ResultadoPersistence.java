@@ -141,7 +141,8 @@ public class ResultadoPersistence extends _ResultadoPersistence  implements IRes
             opciones.add(o2);
             opciones.add(o3);
             opciones.add(o4);
-            pregunta.setOpciones(opciones);
+//            OpcionDTO[] referencia = new [];
+            pregunta.setOpciones((OpcionDTO[])opciones.toArray());
         } catch (JSONException ex) {
             Logger.getLogger(ResultadoPersistence.class.getName()).log(Level.SEVERE, null, ex);
         }
