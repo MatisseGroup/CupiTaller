@@ -28,14 +28,22 @@
 define(['model/_sesionModel'], function() {
     App.Model.SesionModel = App.Model._SesionModel.extend({
 
- 		validate: function(attrs,options){
+ 	validate: function(attrs,options){
             var validationMessage = "";
+            var regExp ="^[0-9]+$"; 
             if(!attrs.name){
-                validationMessage = "The name can't be empty.";
+                validationMessage = "El nombre no puede ser vacio";
+            }
+            else if(!attrs.semanaAnual.match(regExp)){
+              validationMessage="La semana debe ser numérica y sin decimales";
+            }
+            if(attrs.semanaAnual <=0 ){
+              validationMessage = "La semana debe ser mayor a cero";
             }
             if(validationMessage.length>0){
                return validationMessage;
             }
+
         }
 
     });

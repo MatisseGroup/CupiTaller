@@ -1,1 +1,31 @@
-<div>Encuesta inserto correctamente</div>
+<div class = "row">
+  <div class="col-md-2">
+    <ul class="nav nav-tab nav-stacked" role="tablist">
+      <li role="presentation" class="active"><a href="#firstTab" role="tab" data-toggle="tab">Gr&aacute;fico por semana</a></li>
+      <li role="presentation" data-toggle="tab"><a href="#secondTab" role="tab" data-toggle="tab" onclick="compararSemanas(false); return false;">Comparar Semanas</a></li>
+      <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Encuesta 3</a></li>
+    </ul>
+  </div>
+ 
+  <div class="tab-content col-md-10">
+    <div class="tab-pane active" role="tabpanel" id="firstTab">
+      <form id="formPregunta" role="form" >
+          <label for="pregunta">Ingrese la pregunta que desea ver:</label>
+        <select id="pregunta" name="pregunta">
+                      <option value="1">Pregunta 1</option>
+                      <option value="2">Pregunta 2</option>
+                      <option value="3">Pregunta 3</option>
+                      <option value="4">Pregunta 4</option>
+                      <option value="5">Pregunta 5</option>                        
+                    </select>
+        <input type="submit" onclick="consultarResultadoPregunta();return false;" value="Buscar" >
+      </form>
+      <div id="grafica" style="width:800px; height: 400px; margin: 0 auto">
+          
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+  <br><br>

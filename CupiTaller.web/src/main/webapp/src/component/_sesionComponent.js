@@ -32,13 +32,13 @@ define(['component/_CRUDComponent', 'model/sesionModel', 'controller/sesionContr
         listModelClass: App.Model.SesionList,
         controller : App.Controller.SesionController,
         configUI: function(){
-        	this.listComponent.addColumn('name','Name');
+        	//this.listComponent.addColumn('name','Name');
         	this.listComponent.addColumn('estado','Estado');
         	this.listComponent.addColumn('fecha','Fecha');
-        	this.listComponent.addColumn('semanaAnual','Semana Anual');
+        	this.listComponent.addColumn('semanaAnual','Semana');
         	this.listComponent.addColumn('dia','Dia');
-        	this.listComponent.addColumn('estudianteId','Estudiante Id');
-        	this.listComponent.addColumn('monitorId','Monitor Id');
+        	this.listComponent.addColumn('estudianteId','Estudiante');
+        	this.listComponent.addColumn('monitorId','Monitor');
         }
     });
     return App.Component._SesionComponent;

@@ -30,9 +30,21 @@ define(['model/_monitorModel'], function() {
 
  		validate: function(attrs,options){
             var validationMessage = "";
+            var regExp ="^[0-9]+$"; 
             if(!attrs.name){
-                validationMessage = "The name can't be empty.";
+                validationMessage = "El nombre no puede ser vacio";
             }
+            else if(!attrs.puntosNegativos){
+              validationMessage="El campo de puntos negativos no puede ser vacio";
+            }           
+            else if(!attrs.puntosNegativos.match(regExp)){
+              validationMessage="Los puntos deben ser numéricos y sin decimales";
+            }
+
+            else if(attrs.puntosNegativos<0){
+              validationMessage="El valor ingresado debe ser positivo";
+            }
+            
             if(validationMessage.length>0){
                return validationMessage;
             }
