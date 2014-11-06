@@ -11,33 +11,19 @@
     <div class="tab-pane active" role="tabpanel" id="firstTab">
       <form id="formPregunta" role="form" >
         <label for="pregunta">Ingrese un n&uacute;mero de semana</label>
-        <input type="text" name="pregunta"/>
+        <select id="pregunta" name="pregunta">
+                      <option value="1">Pregunta 1</option>
+                      <option value="2">Pregunta 2</option>
+                      <option value="3">Pregunta 3</option>
+                      <option value="4">Pregunta 4</option>
+                      <option value="5">Pregunta 5</option>                        
+                    </select>
         <input type="submit" onclick="consultarResultadoPregunta();return false;" value="Buscar" >
       </form>
       <div id="grafica" style="width:800px; height: 400px; margin: 0 auto">
           
       </div>
       
-    </div>
-
-    <div class="tab-pane" role="tabpanel" id="secondTab">
-      <div class="row">
-        <div class="col-md-2">
-          <h4>Seleccione las semanas a comparar</h4>
-          <form id="formComparar">
-            <select multiple class="form-control" name="semanas">
-              <option>32</option>
-              <option>33</option>
-              <option>34</option>
-              <option>35</option>
-              <option>41</option>
-            </select>
-            <input type="submit" value="comparar" onclick="compararSemanas(true);return false;"></input>
-          </form>
-        </div>
-        <div class="col-md-10" id="graficaComparar">
-        </div>
-      </div>
     </div>
   </div>
 </div>

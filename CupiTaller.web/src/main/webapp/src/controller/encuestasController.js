@@ -38,12 +38,17 @@ $.fn.serializeFormJSON = function() {
 
 function drawTable(div,titulo,x,y,series,data){
     console.log("entro drawtable");
-//    console.log(data);
-     var labs = [];
-        var vals = [];
-        for(var i = 0; i<data.length;i++){
-            labs[i] = data[i].label;
-            vals[i] = data[i].value;
+    console.log(data);
+    var preg = data.pregunta;
+    var pieData = [];
+     var labs = ['muy de acuerdo','de acuerdo', 'en desacuerdo', 'muy en desacuerdo'];
+        var vals = [60.0, 40.0, 0.0, 0.0];
+//        for(var i = 0; i<data.length;i++){
+//            labs[i] = data[i].label;
+//            vals[i] = data[i].value;
+//        }
+        for(var i = 0; i <5;i++){
+            pieData[i] = [labs[i],vals[i]];
         }
         div.highcharts({
         chart: {
@@ -52,7 +57,7 @@ function drawTable(div,titulo,x,y,series,data){
             plotShadow : false
         },
         title: {
-            text: titulo
+            text: preg
         },
         tooltip:{
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -72,19 +77,12 @@ function drawTable(div,titulo,x,y,series,data){
         },
         series: [{
             type: 'pie',
-            name: 'Browser share',
+            name: 'resultados',
             data: [
-                ['Firefox',   45.0],
-                ['IE',       26.8],
-                {
-                    name: 'Chrome',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['Safari',    8.5],
-                ['Opera',     6.2],
-                ['Others',   0.7]
+                ['muy de acuerdo',50.0],
+                ['de acuerdo', 30.0],
+                ['en desacuerdo',10.0],
+                ['muy en desacuerdo', 10.0]
             ]
         }]
     });  
