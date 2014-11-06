@@ -1,1 +1,45 @@
-<div>Encuesta inserto correctamente</div>
+<div class = "row">
+  <div class="col-md-2">
+    <ul class="nav nav-tab nav-stacked" role="tablist">
+      <li role="presentation" class="active"><a href="#firstTab" role="tab" data-toggle="tab">Gr&aacute;fico por semana</a></li>
+      <li role="presentation" data-toggle="tab"><a href="#secondTab" role="tab" data-toggle="tab" onclick="compararSemanas(false); return false;">Comparar Semanas</a></li>
+      <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Encuesta 3</a></li>
+    </ul>
+  </div>
+ 
+  <div class="tab-content col-md-10">
+    <div class="tab-pane active" role="tabpanel" id="firstTab">
+      <form id="formPregunta" role="form" >
+        <label for="pregunta">Ingrese un n&uacute;mero de semana</label>
+        <input type="text" name="pregunta"/>
+        <input type="submit" onclick="consultarResultadoPregunta();return false;" value="Buscar" >
+      </form>
+      <div id="grafica" style="width:800px; height: 400px; margin: 0 auto">
+          
+      </div>
+      
+    </div>
+
+    <div class="tab-pane" role="tabpanel" id="secondTab">
+      <div class="row">
+        <div class="col-md-2">
+          <h4>Seleccione las semanas a comparar</h4>
+          <form id="formComparar">
+            <select multiple class="form-control" name="semanas">
+              <option>32</option>
+              <option>33</option>
+              <option>34</option>
+              <option>35</option>
+              <option>41</option>
+            </select>
+            <input type="submit" value="comparar" onclick="compararSemanas(true);return false;"></input>
+          </form>
+        </div>
+        <div class="col-md-10" id="graficaComparar">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <br><br>
