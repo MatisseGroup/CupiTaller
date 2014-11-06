@@ -33,10 +33,10 @@ define(['component/_CRUDComponent', 'model/monitorModel', 'controller/monitorCon
         controller : App.Controller.MonitorController,
         configUI: function(){
         	this.listComponent.addColumn('name','Name');
-        	this.listComponent.addColumn('activo','Activo');
+        	//this.listComponent.addColumn('activo','Activo');
         	this.listComponent.addColumn('usuario','Usuario');
-        	this.listComponent.addColumn('puntosNegativos','Puntos Negativos');
         	this.listComponent.addColumn('carrera','Carrera');
+          this.listComponent.addColumn('puntosNegativos','Puntos Negativos');
         }
     });
     return App.Component._MonitorComponent;
