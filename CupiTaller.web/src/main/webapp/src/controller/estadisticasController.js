@@ -1,15 +1,35 @@
-function consultarEstadisticasSemana(){
-        var formData = $("#formSemana").serializeFormJSON();
-        $.ajax({
-          url: '/CupiTaller.web/webresources/Sesion/estadistica',
-          data: formData,
-          type: 'GET',
-          contentType: 'application/json',
-          success: function(data){
-            var myDiv = $('#grafica');
-            drawTable(myDiv,'Resultados Semana ' + formData.semanaAnual, 'Estado', 'Cantidad', 1 , data);
-          }
-        });
+function consultarEstadisticasSemana(realizar){
+    var formData;
+    if(realizar)
+      formData = $("#formSemana").serializeFormJSON();
+
+    $.ajax({
+      url: '/CupiTaller.web/webresources/Sesion/estadistica',
+      data: formData,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function(data){
+        var myDiv = $('#grafica');
+        var titulo = 'Resultados Última Semana';
+        if(realizar){
+          titulo = 'Resultados Semana ' + formData.semanaAnual;
+        }
+        drawTable(myDiv, titulo, 'Estado', 'Cantidad', 1 , data);
+      }
+    });
+}
+
+function compararSemanas(){
+  var formData = $("#formComparar").serializeFormJSON();
+   $.ajax({
+      url: '/CupiTaller.web/webresources/Sesion/compararSemanas',
+      data: formData,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function(data){
+        console.log(data);
+      }
+    });
 }
 
 $.fn.serializeFormJSON = function() {
@@ -30,11 +50,13 @@ $.fn.serializeFormJSON = function() {
 
 function drawTable(div,titulo,x,y,series,data){
     console.log("entro drawtable");
-     var labs = [];
+        var labs = [];
         var vals = [];
+        var names = [];
         for(var i = 0; i<data.length;i++){
             labs[i] = data[i].label;
             vals[i] = data[i].value;
+            names[i] = data[i].name;
         }
         div.highcharts({
             chart: {
@@ -84,7 +106,7 @@ function drawTable(div,titulo,x,y,series,data){
             enabled: false
         },
         series: [{
-            name: 'Cantidad',
+            name: names[0],
             data: vals
         }]
        });  

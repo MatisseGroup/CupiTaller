@@ -1,31 +1,57 @@
-<div class="tabbable">
+<ul class="nav nav-tab nav-stacked" role="tablist">
+  <li role="presentation" class="active"><a href="#firstTab" role="tab" data-toggle="tab">Gr&aacute;fico por semana</a></li>
+  <li role="presentation" data-toggle="tab"><a href="#secondTab" role="tab" data-toggle="tab">Comparar Semanas</a></li>
+  <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Encuesta 3</a></li>
+</ul>
+
+<!-- <div class="tabbable">
   <ul class="nav nav-tabs">
   <li class ="active">
-  	<a href="#firstTab" data-toggle="tab">Encuesta 1</a>
+  	<a href="#firstTab" data-toggle="tab">Gr&aacute;fico por semana</a>
   </li>
   <li>
-  	<a href="#secondTab" data-toggle="tab">Encuesta 2</a>
+  	<a href="#secondTab" data-toggle="tab">Comparar Semanas</a>
   </li>
   <li>
   	<a href="#thirdTab" data-toggle="tab">Encuesta 3</a>
   </li>
   </ul>
-  <br>
-  <div class="container">
-  	<div class="tab-pane active" id="firstTab" style="width:800px; height: 400px; margin: 0 auto">
-  		<div id="grafica"></div>
-		<form id="formSemana" role="form" >
-    		<label for="semanaAnual">Ingrese un n&uacute;mero de semana</label>
-    		<input type="text" name="semanaAnual"/>
-    		<input type="submit" onclick="consultarEstadisticasSemana();return false;" value="Buscar" >
-	    </form>
-	</div>
-	<div class="tab-pane" id="secondTab">
-        <p>Seccion B</p>
-	</div>
-	<div class="tab-pane" id="thirdTab">
+  <br> -->
+  <div class="tab-content">
+  	<div class="tab-pane active" role="tabpanel" id="firstTab">
+      <form id="formSemana" role="form" >
+        <label for="semanaAnual">Ingrese un n&uacute;mero de semana</label>
+        <input type="text" name="semanaAnual"/>
+        <input type="submit" onclick="consultarEstadisticasSemana();return false;" value="Buscar" >
+      </form>
+  		<div id="grafica" style="width:800px; height: 400px; margin: 0 auto">
+          
+      </div>
+		  
+	  </div>
+
+	  <div class="tab-pane" role="tabpanel" id="secondTab">
+      <div class="row">
+        <div class="col-md-2">
+          <h4>Seleccione las semanas a comparar</h4>
+          <form id="formComparar">
+            <select multiple class="form-control" name="semanas">
+              <option>32</option>
+              <option>33</option>
+              <option>34</option>
+              <option>35</option>
+              <option>36</option>
+            </select>
+            <input type="submit" value="comparar" onclick="compararSemanas()"></input>
+          </form>
+        </div>
+        <div class="col-md-10" id="graficaComparar">
+        </div>
+      </div>
+    </div>
+
+	  <div class="tab-pane" role="tabpanel" id="thirdTab">
         <p>Seccion C</p>
-	</div>
+	  </div>
   </div>
   <br><br>
-</div>
