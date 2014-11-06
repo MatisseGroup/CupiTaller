@@ -11,7 +11,7 @@
     <div class="tab-pane active" role="tabpanel" id="firstTab">
       <form id="formSemana" role="form" >
         <label for="semanaAnual">Ingrese un n&uacute;mero de semana</label>
-        <input type="text" name="semanaAnual"/>
+        <select name = "semanaAnual" id = "opcionesSemana"></select> 
         <input type="submit" onclick="consultarEstadisticasSemana(true);return false;" value="Buscar" >
       </form>
       <div id="grafica" style="width:800px; height: 400px; margin: 0 auto">
@@ -25,12 +25,8 @@
         <div class="col-md-2">
           <h4>Seleccione las semanas a comparar</h4>
           <form id="formComparar">
-            <select multiple class="form-control" name="semanas">
-              <option>32</option>
-              <option>33</option>
-              <option>34</option>
-              <option>35</option>
-              <option>41</option>
+            <select multiple class="form-control" name="semanas" id="compararOpciones">
+
             </select>
             <input type="submit" value="comparar" onclick="compararSemanas(true);return false;"></input>
           </form>

@@ -54,7 +54,7 @@ public abstract class _SesionPersistence implements _ISesionPersistence {
 	
 	@SuppressWarnings("unchecked")
 	public List<SesionDTO> getSesions() {
-		Query q = entityManager.createQuery("select u from SesionEntity u");
+		Query q = entityManager.createQuery("select u from SesionEntity");
 		return SesionConverter.entity2PersistenceDTOList(q.getResultList());
 	}
 

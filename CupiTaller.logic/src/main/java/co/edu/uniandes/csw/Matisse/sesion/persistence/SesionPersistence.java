@@ -98,4 +98,17 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
 	Integer regCount = Integer.parseInt(count.getSingleResult().toString());
         return regCount;
     }
+    
+    public List<EntradasDTO>darSemanas(){
+        ArrayList<EntradasDTO>respuesta = new ArrayList<EntradasDTO>();
+        Query count = entityManager.createNativeQuery("select distinct(semanaAnual) from sesionEntity");
+        List<Object[]> lista = count.getResultList();
+        Object[] arreglo = lista.toArray();
+        for(int i = 0; i<arreglo.length;i++){
+            EntradasDTO nueva = new EntradasDTO();
+            nueva.setValue((Integer)arreglo[i]);
+            respuesta.add(nueva);
+        }
+        return respuesta;
+    }
 }

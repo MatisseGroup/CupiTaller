@@ -93,4 +93,11 @@ public class SesionService extends _SesionService {
 	System.out.println("entro sesiones por semana");
         return sesionLogicService.getSesionesSemana(page, maxRecords, semana);
     }
+    
+    @GET
+    @Path("opcionesSemana")
+    public List<EntradasDTO>darSemanas(){
+        return sesionLogicService.darSemanas();
+    }
+    
 }

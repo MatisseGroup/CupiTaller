@@ -40,5 +40,7 @@ public interface ISesionLogicService extends _ISesionLogicService {
     public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana);
 
     public Integer darUltimaSemana();
+    
+    public List<EntradasDTO>darSemanas();
 
 }
