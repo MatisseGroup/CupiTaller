@@ -35,13 +35,13 @@ public class PreguntaDTO extends _PreguntaDTO {
     
     private String pregunta;
     
-    private List<OpcionDTO> opciones;
+    private OpcionDTO[] opciones;
 
-    public List<OpcionDTO> getOpciones() {
+    public OpcionDTO[] getOpciones() {
         return opciones;
     }
 
-    public void setOpciones(List<OpcionDTO> opciones) {
+    public void setOpciones(OpcionDTO[] opciones) {
         this.opciones = opciones;
     }
 
