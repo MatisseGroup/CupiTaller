@@ -52,7 +52,7 @@ import org.codehaus.jettison.json.JSONObject;
 @LocalBean
 public class ResultadoPersistence extends _ResultadoPersistence  implements IResultadoPersistence {
 
-    public ResultadoDTO listarPreguntas(Integer semana) {
+    public ResultadoDTO listarPreguntas(int semana) {
         ResultadoDTO resultado = new ResultadoDTO();
         ServiciosAPI limeSurvey = ServiciosAPI.getInstance();
         List<GrupoDTO> grupos = new ArrayList();
@@ -87,15 +87,18 @@ public class ResultadoPersistence extends _ResultadoPersistence  implements IRes
         return resultado;
     }
 
-    public PreguntaDTO respuestaA(Integer id) {
+    public PreguntaDTO respuestaA(int id) {
         ServiciosAPI limeSurvey = ServiciosAPI.getInstance();
+        
         JSONObject surveyQuestion = limeSurvey.getQuestionsProperties(id);
+        System.err.println("bien");
         PreguntaDTO pregunta = new PreguntaDTO();
         try {
         String titulo = surveyQuestion.getString("title");
+        System.err.println("bien");
         pregunta.setPregunta(surveyQuestion.getString("question"));
         pregunta.setName(titulo);
-        pregunta.setId(id.longValue());
+        pregunta.setId(Long.getLong(""+id));
         OpcionDTO o1 = new OpcionDTO();
         OpcionDTO o2 = new OpcionDTO();
         OpcionDTO o3 = new OpcionDTO();
@@ -103,12 +106,12 @@ public class ResultadoPersistence extends _ResultadoPersistence  implements IRes
         JSONObject options = surveyQuestion.getJSONObject("answeroptions");
         o1.setLabel(options.getJSONObject("A1").getString("answer"));
         o1.setId("A1");
-        o1.setLabel(options.getJSONObject("A2").getString("answer"));
-        o1.setId("A2");
-        o1.setLabel(options.getJSONObject("A3").getString("answer"));
-        o1.setId("A3");
-        o1.setLabel(options.getJSONObject("A4").getString("answer"));
-        o1.setId("A4");
+        o2.setLabel(options.getJSONObject("A2").getString("answer"));
+        o2.setId("A2");
+        o3.setLabel(options.getJSONObject("A3").getString("answer"));
+        o3.setId("A3");
+        o4.setLabel(options.getJSONObject("A4").getString("answer"));
+        o4.setId("A4");
         List<OpcionDTO> opciones = new ArrayList();
         JSONObject respuestas = limeSurvey.exportResponses();
         

@@ -33,8 +33,8 @@ import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
 
 public interface IResultadoPersistence extends _IResultadoPersistence {
 
-    public ResultadoDTO listarPreguntas(Integer semana);
+    public ResultadoDTO listarPreguntas(int semana);
 
-    public PreguntaDTO respuestaA(Integer id);
+    public PreguntaDTO respuestaA(int id);
 
 }
