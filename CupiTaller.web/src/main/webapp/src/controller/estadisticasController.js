@@ -10,24 +10,42 @@ function consultarEstadisticasSemana(realizar){
       contentType: 'application/json',
       success: function(data){
         var myDiv = $('#grafica');
-        var titulo = 'Resultados Última Semana';
+        var titulo = 'Resultados última semana';
         if(realizar){
           titulo = 'Resultados Semana ' + formData.semanaAnual;
         }
-        drawTable(myDiv, titulo, 'Estado', 'Cantidad', 1 , data);
+        var labs = data.label;;
+        var series=[];
+        series[0] = {name: data.name, data:data.value};
+        drawTable(myDiv, titulo, 'Estado', 'Cantidad',labs,series);
       }
     });
 }
 
-function compararSemanas(){
-  var formData = $("#formComparar").serializeFormJSON();
+function compararSemanas(realizar){
+   var formData = $("#formComparar").serializeFormJSON();
    $.ajax({
       url: '/CupiTaller.web/webresources/Sesion/compararSemanas',
       data: formData,
       type: 'GET',
       contentType: 'application/json',
       success: function(data){
-        console.log(data);
+        var myDiv = $('#graficaComparar');
+        var titulo = 'Resultados último mes';
+        if(realizar){
+          titulo = 'Resultados Semanas ' + formData.semanas[0];
+          for(var i=1;i<formData.semanas.length;i++){
+            titulo+=', ' + formData.semanas[i];
+          }
+        }
+        var labs = data[0].label;;
+        var series=[];
+        for(var i=0;i<data.length;i++){
+          if(data[i].label.length > labs.length){
+            labs = data[i].label;          }
+          series[i] = {name: data[i].name, data:data[i].value}
+        }
+        drawTable(myDiv, titulo, 'Estado', 'Cantidad',labs,series);
       }
     });
 }
@@ -48,16 +66,8 @@ $.fn.serializeFormJSON = function() {
    return o;
 };
 
-function drawTable(div,titulo,x,y,series,data){
+function drawTable(div,titulo,x,y,labels,series){
     console.log("entro drawtable");
-        var labs = [];
-        var vals = [];
-        var names = [];
-        for(var i = 0; i<data.length;i++){
-            labs[i] = data[i].label;
-            vals[i] = data[i].value;
-            names[i] = data[i].name;
-        }
         div.highcharts({
             chart: {
             type: 'column'
@@ -66,7 +76,7 @@ function drawTable(div,titulo,x,y,series,data){
             text: titulo
         },
         xAxis: {
-            categories: labs,
+            categories: labels,
             title: {
                 text: x
             }
@@ -105,10 +115,7 @@ function drawTable(div,titulo,x,y,series,data){
         credits: {
             enabled: false
         },
-        series: [{
-            name: names[0],
-            data: vals
-        }]
+        series: series
        });  
 }
 

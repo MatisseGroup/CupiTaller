@@ -28,6 +28,7 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.logic.ejb;
 
+import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
 import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -45,7 +46,7 @@ import java.util.List;
 @LocalBean
 public class SesionLogicService extends _SesionLogicService implements ISesionLogicService {
 
-    public List<EntradasDTO> darEstadisticaPorSemana(int semana) {
+    public SemanaDTO darEstadisticaPorSemana(int semana) {
         return persistance.darEstadisticaPorSemana(semana);
     }
 

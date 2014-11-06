@@ -28,6 +28,7 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.persistence;
 
+import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
 import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -245,9 +246,9 @@ public class SesionPersistenceTest {
         
         @Test
         public void darEstadisticasSemanaTest(){
-            List<EntradasDTO> list=sesionPersistence.darEstadisticaPorSemana(32);
-            Assert.assertEquals(list.size(), 1);
-            Assert.assertTrue(list.get(0).getValue()==3);
-            Assert.assertTrue(list.get(0).getLabel().equals("Cancelado"));
+            SemanaDTO semana=sesionPersistence.darEstadisticaPorSemana(32);
+            Assert.assertNotNull(semana);
+            Assert.assertTrue(semana.getValue().length==3);
+            Assert.assertTrue(semana.getLabel()[0].equals("Cancelado"));
         }
 }

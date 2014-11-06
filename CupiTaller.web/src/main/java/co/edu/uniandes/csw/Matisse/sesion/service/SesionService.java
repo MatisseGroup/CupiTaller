@@ -28,12 +28,16 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.service;
 
+import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
 import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,6 +45,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/Sesion")
@@ -53,13 +58,33 @@ public class SesionService extends _SesionService {
 
     @GET
     @Path("estadistica")
-    public List<EntradasDTO> darEstadisticasPorSemana(@QueryParam("semanaAnual")Integer semana) {
-        System.out.println("Semana: " + semana);
+    public SemanaDTO darEstadisticasPorSemana(@QueryParam("semanaAnual")Integer semana) {
         if(semana==null){
             semana = sesionLogicService.darUltimaSemana();
-            System.out.println("Semana reasignada : " + semana);
         }
         return sesionLogicService.darEstadisticaPorSemana(semana);
+    }
+    
+    @GET
+    @Path("compararSemanas")
+    public List<SemanaDTO> compararEstadisticasPorSemana() {
+        ArrayList<SemanaDTO> respuesta = new ArrayList<SemanaDTO>();
+        MultivaluedMap<String, String> queryParams = uriInfo.getQueryParameters();
+        Collection<List<String>> semanas = queryParams.values();
+        if(semanas.size()==0){
+            int ultima = sesionLogicService.darUltimaSemana();
+            for(int i = 0; i<4 && ultima>0;i++){
+                respuesta.add(darEstadisticasPorSemana(ultima));
+                ultima--;
+            }
+        }
+        else{
+            for(String semana: semanas.iterator().next()){
+                respuesta.add(darEstadisticasPorSemana(Integer.parseInt(semana)));
+            }
+        }
+        
+        return respuesta; 
     }
     
     @GET
