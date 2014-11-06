@@ -174,7 +174,7 @@ define(['controller/messageController', 'component/toolbarComponent', 'component
             this.toolbarComponent.addButton({
                 name: 'save',
                 icon: 'glyphicon-floppy-disk',
-                displayName: 'Save',
+                displayName: 'Guardar',
                 show: false
             },
             this.save,
@@ -183,7 +183,7 @@ define(['controller/messageController', 'component/toolbarComponent', 'component
             this.toolbarComponent.addButton({
                 name: 'cancel',
                 icon: 'glyphicon-remove-sign',
-                displayName: 'Cancel',
+                displayName: 'Cancelar',
                 show: false
             },
             this.cancel,
