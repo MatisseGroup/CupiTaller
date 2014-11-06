@@ -33,9 +33,6 @@ import co.edu.uniandes.csw.Matisse.grupo.logic.dto.GrupoDTO;
 import co.edu.uniandes.csw.Matisse.opcion.dto.OpcionDTO;
 import co.edu.uniandes.csw.Matisse.pregunta.logic.dto.PreguntaDTO;
 import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
-
 import co.edu.uniandes.csw.Matisse.resultado.persistence.api.IResultadoPersistence;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -43,6 +40,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -96,7 +96,9 @@ public class ResultadoPersistence extends _ResultadoPersistence  implements IRes
         try {
         String titulo = surveyQuestion.getString("title");
         System.err.println("bien");
-        pregunta.setPregunta(surveyQuestion.getString("question"));
+        String pregu = surveyQuestion.getString("question").replaceAll("&aacute;", "á").replaceAll("&eacute;", "é").replaceAll("&iacute;", "í").replaceAll("&oacute;", "ó").replaceAll("&uacute;", "ú").replaceAll("&ntilde;", "ñ");
+//        String pregun = StringEscapeUtils.unescapeHtml4(pregu);
+        pregunta.setPregunta(pregu);
         pregunta.setName(titulo);
         pregunta.setId(Long.getLong(""+id));
         OpcionDTO o1 = new OpcionDTO();
