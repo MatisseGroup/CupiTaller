@@ -33,6 +33,7 @@ define(['component/_monitorComponent'], function() {
             this.toolbarComponent.removeButton('create');
             this.toolbarComponent.removeButton('refresh');
             this.toolbarComponent.removeButton('print');
+            this.toolbarComponent.removeButton('search');
         }
     });
     return App.Component.MonitorComponent;

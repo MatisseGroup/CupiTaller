@@ -44,12 +44,12 @@
              },
              this.buscar,this);
              
-             this.toolbarComponent.addButton({
-                name: 'comparar',
-                 displayName: 'Comparar',
-                 icon: 'glyphicon-th-large',
-                 show: true
-             });
+//             this.toolbarComponent.addButton({
+//                name: 'comparar',
+//                 displayName: 'Comparar',
+//                 icon: 'glyphicon-th-large',
+//                 show: true
+//             });
              
              this.toolbarComponent.addButton({
                 name: 'reporte',
