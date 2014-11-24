@@ -57,7 +57,7 @@ import javax.persistence.Query;
 public class SesionPersistence extends _SesionPersistence implements ISesionPersistence {
 
     public SemanaDTO darEstadisticaPorSemana(int semana) {
-        String query = "select estado as label, count(estado) as value from SESIONENTITY where semanaAnual = ? group by estado order by estado";
+        String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where semanaAnual = ? group by estado order by estado)co on dis.label=co.label)";
         Query q = entityManager.createNativeQuery(query);
         q.setParameter(1,semana);
         List<Object[]> lista = q.getResultList();
