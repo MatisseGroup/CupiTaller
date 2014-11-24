@@ -100,4 +100,10 @@ public class SesionService extends _SesionService {
         return sesionLogicService.darSemanas();
     }
     
+    @GET
+    @Path("sesionesMonitor")
+    public SemanaDTO darEstadisticasPorMonitor(@QueryParam("idMonitor")Integer monitor) {
+        return sesionLogicService.darEstadisticaPorMonitor(monitor);
+    }
+    
 }

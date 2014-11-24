@@ -22,6 +22,25 @@ function consultarEstadisticasSemana(realizar){
     });
 }
 
+function consultarEstadisticasMonitor(){
+    var formData = $("#formMonitor").serializeFormJSON();
+    var nombre = $('#opcionesMonitor option:selected').text();
+    $.ajax({
+      url: '/CupiTaller.web/webresources/Sesion/sesionesMonitor',
+      data: formData,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function(data){
+        var myDiv = $('#graficaMonitor');
+        var titulo = 'Sesiones de ' + nombre;
+        var labs = data.label;;
+        var series=[];
+        series[0] = {name: data.name, data:data.value};
+        drawTable(myDiv, titulo, 'Estado', 'Cantidad',labs,series);
+      }
+    });
+}
+
 function compararSemanas(realizar){
    var formData = $("#formComparar").serializeFormJSON();
    $.ajax({
@@ -118,7 +137,23 @@ function drawTable(div,titulo,x,y,labels,series){
         series: series
        });  
 }
-
+function configurarMonitores(){
+   $.ajax({
+      url: '/CupiTaller.web/webresources/Monitor',
+      type: 'GET',
+      data: {"page":1,"maxRecords":100},
+      contentType: 'application/json',
+      success: function(data){
+        for(var i = 0; i<data["records"].length;i++){
+          var option = document.createElement("option");
+          option.text = data["records"][i]["name"];
+          option.value = data["records"][i]["id"];
+          var select2 = document.getElementById("opcionesMonitor");
+          select2.appendChild(option); 
+        }
+      }
+    });
+}
 function configurarSemanas(){
   $.ajax({
       url: '/CupiTaller.web/webresources/Sesion/opcionesSemana',

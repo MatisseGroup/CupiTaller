@@ -43,4 +43,6 @@ public interface ISesionLogicService extends _ISesionLogicService {
     
     public List<EntradasDTO>darSemanas();
 
+    public SemanaDTO darEstadisticaPorMonitor(Integer monitor);
+
 }

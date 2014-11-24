@@ -32,6 +32,7 @@ import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import co.edu.uniandes.csw.Matisse.entradas.persistence.converter.EntradasConverter;
 import co.edu.uniandes.csw.Matisse.entradas.persistence.converter._EntradasConverter;
 import co.edu.uniandes.csw.Matisse.entradas.persistence.entity.EntradasEntity;
+import co.edu.uniandes.csw.Matisse.monitor.persistence.MonitorPersistence;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
 import javax.ejb.Stateless;
@@ -110,5 +111,23 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
             respuesta.add(nueva);
         }
         return respuesta;
+    }
+
+    public SemanaDTO estadisticasMonitor(Integer monitor) {
+        String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where monitorid = ? group by estado order by estado)co on dis.label=co.label)";
+        Query q = entityManager.createNativeQuery(query);
+        q.setParameter(1,monitor);
+        List<Object[]> lista = q.getResultList();
+        SemanaDTO sem = new SemanaDTO();
+        String[] labels = new String[lista.size()];
+        Integer[] values = new Integer[lista.size()];
+        for(int i=0;i<lista.size();i++){
+            Object actual[] = lista.get(i);
+            labels[i] = (String)actual[0];
+            values[i] = (Integer)actual[1];
+        }
+        sem.setLabel(labels);
+        sem.setValue(values);
+        return sem;
     }
 }

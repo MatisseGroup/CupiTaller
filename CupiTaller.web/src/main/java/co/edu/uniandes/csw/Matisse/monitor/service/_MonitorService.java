@@ -64,7 +64,7 @@ public abstract class _MonitorService {
 	public MonitorPageDTO getMonitors(@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
 		return monitorLogicService.getMonitors(page, maxRecords);
 	}
-	
+        
 	@GET
 	@Path("{id}")
 	public MonitorDTO getMonitor(@PathParam("id") Long id){

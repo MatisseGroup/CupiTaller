@@ -43,4 +43,6 @@ public interface ISesionPersistence extends _ISesionPersistence {
     
     public List<EntradasDTO>darSemanas();
 
+    public SemanaDTO estadisticasMonitor(Integer monitor);
+
 }

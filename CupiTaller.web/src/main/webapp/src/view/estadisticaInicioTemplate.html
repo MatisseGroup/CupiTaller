@@ -3,7 +3,7 @@
     <ul class="nav nav-tab nav-pills" role="tablist">
       <li role="presentation" class="active"><a href="#firstTab" role="tab" data-toggle="tab">Gr&aacute;fico por semana</a></li>
       <li role="presentation" data-toggle="tab" ><a href="#secondTab" role="tab" data-toggle="tab" onclick="compararSemanas(false); return false;">Comparar Semanas</a></li>
-     <!-- <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Encuesta 3</a></li> -->
+      <li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab" onclick="configurarMonitores();return false;">Gr&aacute;fico por monitor</a></li>
     </ul>
   </div>
  
@@ -46,7 +46,20 @@
     </div>
 
     <div class="tab-pane" role="tabpanel" id="thirdTab">
-        <p>Seccion C</p>
+      <div class="tab-pane active" role="tabpanel" id="firstTab">
+      <div class="well row">
+      <form id="formMonitor" role="form">
+        Seleccione un monitor
+        <br>
+        <select class="form-control" name = "idMonitor" id = "opcionesMonitor"></select> 
+        <br>
+        <input type="submit" class="btn btn-default" onclick="consultarEstadisticasMonitor();return false;" value="Buscar" >
+      </form>
+       </div>
+        
+      <div class ="row" id="graficaMonitor" style="width:900px; height: 400px; margin: 0 auto">
+          
+      </div>
     </div>
   </div>
 </div>
