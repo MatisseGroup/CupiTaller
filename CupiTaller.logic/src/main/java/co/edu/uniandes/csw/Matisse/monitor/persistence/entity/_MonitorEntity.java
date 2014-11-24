@@ -47,6 +47,7 @@ public abstract class _MonitorEntity {
 	private String usuario;
 	private Integer puntosNegativos;
 	private String carrera;
+	private Integer llegadasTarde;
 
 	public Long getId(){
 		return id;
@@ -89,5 +90,12 @@ public abstract class _MonitorEntity {
 	
 	public void setCarrera(String carrera){
 		this.carrera = carrera;
+	}
+	public Integer getLlegadasTarde(){
+		return llegadasTarde;
+	}
+	
+	public void setLlegadasTarde(Integer llegadasTarde){
+		this.llegadasTarde = llegadasTarde;
 	}
 }

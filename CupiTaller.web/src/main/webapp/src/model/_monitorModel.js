@@ -33,7 +33,8 @@ define([], function() {
 		 'activo' :  false  ,  
 		 'usuario' : '' ,  
 		 'puntosNegativos' : '' ,  
-		 'carrera' : ''        },
+		 'carrera' : '' ,  
+		 'llegadasTarde' : ''        },
         initialize: function() {
           var self = this;
           this.on('invalid',function(error){

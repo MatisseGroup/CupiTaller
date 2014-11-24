@@ -53,6 +53,9 @@ public abstract class _MonitorDTO {
 	
 
 	private String carrera;
+	
+
+	private Integer llegadasTarde;
 
 
 
@@ -107,6 +110,15 @@ public abstract class _MonitorDTO {
  
 	public void setCarrera(String carrera) {
 		this.carrera = carrera;
+	}
+
+
+	public Integer getLlegadasTarde() {
+		return llegadasTarde;
+	}
+ 
+	public void setLlegadasTarde(Integer llegadastarde) {
+		this.llegadasTarde = llegadastarde;
 	}
 	
 }

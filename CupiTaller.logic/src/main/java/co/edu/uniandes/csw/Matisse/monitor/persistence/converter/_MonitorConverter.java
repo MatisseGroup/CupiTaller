@@ -50,6 +50,7 @@ public abstract class _MonitorConverter {
 					dto.setUsuario(entity.getUsuario());
 					dto.setPuntosNegativos(entity.getPuntosNegativos());
 					dto.setCarrera(entity.getCarrera());
+					dto.setLlegadasTarde(entity.getLlegadasTarde());
 			return dto;
 		}else{
 			return null;
@@ -70,6 +71,8 @@ public abstract class _MonitorConverter {
 					entity.setPuntosNegativos(dto.getPuntosNegativos());
 			
 					entity.setCarrera(dto.getCarrera());
+			
+					entity.setLlegadasTarde(dto.getLlegadasTarde());
 			
 			return entity;
 		}else {
