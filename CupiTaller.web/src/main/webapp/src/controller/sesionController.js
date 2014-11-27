@@ -95,7 +95,17 @@ define(['controller/_sesionController', 'delegate/sesionDelegate'], function () 
             },function (data) {
                 Backbone.trigger(self.componentId + '-' + 'error', {event: 'sesion-search', view: self, id: '', data: data, error: 'Error in sesion search'});
             });
+        },
+        postInit: function(){
+            var self=this;
+            Backbone.on(this.componentId + '-toolbar-print', function(params) {
+                self.print();
+            });
+        },
+        print: function(){
+            window.open("/CupiTaller.web/webresources/Sesion/report","_blank")
         }
+        
     });
     return App.Controller.SesionController;
 }); 

@@ -45,4 +45,6 @@ public interface ISesionLogicService extends _ISesionLogicService {
 
     public SemanaDTO darEstadisticaPorMonitor(Integer monitor);
 
+    public byte[] getReport();
+
 }

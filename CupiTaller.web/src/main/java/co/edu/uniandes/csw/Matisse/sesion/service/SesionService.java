@@ -106,4 +106,11 @@ public class SesionService extends _SesionService {
         return sesionLogicService.darEstadisticaPorMonitor(monitor);
     }
     
+    @GET
+    @Path("/report")
+    @Produces("application/pdf")
+    public byte[] getReport(){
+        return sesionLogicService.getReport();
+    }
+    
 }

@@ -44,6 +44,7 @@ import java.util.List;
 @Default
 @Stateless
 @LocalBean
+
 public class SesionLogicService extends _SesionLogicService implements ISesionLogicService {
 
     public SemanaDTO darEstadisticaPorSemana(int semana) {
@@ -64,6 +65,11 @@ public class SesionLogicService extends _SesionLogicService implements ISesionLo
 
     public SemanaDTO darEstadisticaPorMonitor(Integer monitor) {
         return persistance.estadisticasMonitor(monitor);
+    }
+
+    public byte[] getReport() {
+
+        return persistance.getReport();
     }
 
 }

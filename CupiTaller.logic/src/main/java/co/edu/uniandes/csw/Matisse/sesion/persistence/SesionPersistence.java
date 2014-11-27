@@ -35,26 +35,35 @@ import co.edu.uniandes.csw.Matisse.entradas.persistence.entity.EntradasEntity;
 import co.edu.uniandes.csw.Matisse.monitor.persistence.MonitorPersistence;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
-
 import co.edu.uniandes.csw.Matisse.sesion.persistence.api.ISesionPersistence;
 import co.edu.uniandes.csw.Matisse.sesion.persistence.converter.SesionConverter;
+import java.io.ByteArrayOutputStream;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.Parameter;
 import javax.persistence.Query;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 @Default
 @Stateless
 @LocalBean
+
 public class SesionPersistence extends _SesionPersistence implements ISesionPersistence {
 
     public SemanaDTO darEstadisticaPorSemana(int semana) {
@@ -129,5 +138,22 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
         sem.setLabel(labels);
         sem.setValue(values);
         return sem;
+    }
+
+    public byte[] getReport() {
+    try {
+            Map parameters = new HashMap();
+            JasperReport report = JasperCompileManager.compileReport(
+                    "C:\\informes jasper\\JRXML\\Usuarios.jrxml");
+            Connection conn = entityManager.unwrap(java.sql.Connection.class);
+            JasperPrint print = JasperFillManager.fillReport(report, parameters, conn);
+            // Exporta el informe a PDF
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(print, baos);
+            return baos.toByteArray();
+        } catch (JRException ex) {
+            Logger.getLogger(SesionPersistence.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }

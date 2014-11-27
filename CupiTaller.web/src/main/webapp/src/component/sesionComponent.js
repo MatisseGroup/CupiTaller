@@ -56,7 +56,8 @@
                  displayName: 'Generar Reporte',
                  icon: 'glyphicon-stats',
                  show: true
-             });
+             },
+             this.print(),this);
              
              //Sub-botones toolbar
             this.toolbarComponent.addButton({
@@ -102,6 +103,10 @@
             this.toolbarComponent.render();
             this.componentController.buscarSesionesPorSemana(this.list,this);
             this.componentController.darEstadistica(this.list,this);
+        },
+        
+        print:  function(){
+            this.componentController.print();
         }
 });
 return App.Component.SesionComponent;

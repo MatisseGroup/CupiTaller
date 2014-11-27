@@ -57,6 +57,10 @@ public class SesionMockLogicService extends _SesionMockLogicService implements I
     public SemanaDTO darEstadisticaPorMonitor(Integer monitor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public byte[] getReport() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 	
 }

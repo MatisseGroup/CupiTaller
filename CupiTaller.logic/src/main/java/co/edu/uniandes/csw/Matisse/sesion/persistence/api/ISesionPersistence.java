@@ -45,4 +45,6 @@ public interface ISesionPersistence extends _ISesionPersistence {
 
     public SemanaDTO estadisticasMonitor(Integer monitor);
 
+    public byte[] getReport();
+
 }
