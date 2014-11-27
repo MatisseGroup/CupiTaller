@@ -144,7 +144,7 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
     try {
             Map parameters = new HashMap();
             JasperReport report = JasperCompileManager.compileReport(
-                    "C:\\informes jasper\\JRXML\\Usuarios.jrxml");
+                    "/Users/sfrsebastian/Desktop/CupiTaller/CupiTaller.logic/reporte1.jrxml");
             Connection conn = entityManager.unwrap(java.sql.Connection.class);
             JasperPrint print = JasperFillManager.fillReport(report, parameters, conn);
             // Exporta el informe a PDF

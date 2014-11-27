@@ -57,7 +57,7 @@
                  icon: 'glyphicon-stats',
                  show: true
              },
-             this.print(),this);
+             this.print,this);
              
              //Sub-botones toolbar
             this.toolbarComponent.addButton({
