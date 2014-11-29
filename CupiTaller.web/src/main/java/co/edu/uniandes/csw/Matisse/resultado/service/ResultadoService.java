@@ -48,9 +48,9 @@ public class ResultadoService extends _ResultadoService {
 
     @GET
     @Path("ListarPreguntas")
-    public ResultadoDTO listarPreguntas(@QueryParam("fecha")Integer semana){
+    public List<PreguntaDTO> listarPreguntas(){
         System.err.println("conseguira todas las respuesta");
-        return resultadoLogicService.listarPreguntas(semana);
+        return resultadoLogicService.listarPreguntas();
     } 
     
     @GET
