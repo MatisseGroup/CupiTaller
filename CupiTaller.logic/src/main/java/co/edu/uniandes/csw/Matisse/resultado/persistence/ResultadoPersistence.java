@@ -83,7 +83,7 @@ public class ResultadoPersistence extends _ResultadoPersistence implements IResu
         JSONObject surveyQuestion = limeSurvey.getQuestionsProperties(id);
         try{
             String titulo = surveyQuestion.getString("title");
-            String pregun = surveyQuestion.getString("quesiton")
+            String pregun = surveyQuestion.getString("question")
                     .replaceAll("&aacute;", "á").replaceAll("&eacute;", "é")
                     .replaceAll("&iacute;", "í").replaceAll("&oacute;", "ó")
                     .replaceAll("&uacute;", "ú").replaceAll("&ntilde;", "ñ");
