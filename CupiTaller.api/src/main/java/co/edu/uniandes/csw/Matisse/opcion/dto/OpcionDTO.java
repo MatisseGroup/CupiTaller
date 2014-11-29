@@ -10,14 +10,14 @@ package co.edu.uniandes.csw.Matisse.opcion.dto;
  * @author Jairo
  */
 public class OpcionDTO {
-    
+
     private String id;
-    
+
     private String label;
-    
+
     private int cantidad;
-    
-    public OpcionDTO(){
+
+    public OpcionDTO() {
         cantidad = 0;
     }
 
