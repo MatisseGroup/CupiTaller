@@ -29,7 +29,6 @@
 package co.edu.uniandes.csw.Matisse.sesion.service;
 
 import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
-import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -37,12 +36,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -99,7 +94,6 @@ public class SesionService extends _SesionService {
     @GET
     @Path("sesionesSemana")
     public SesionPageDTO getSesionesSemana(@QueryParam("semanaAnual")Integer semana,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
-	System.out.println("entro sesiones por semana");
         return sesionLogicService.getSesionesSemana(page, maxRecords, semana);
     }
     

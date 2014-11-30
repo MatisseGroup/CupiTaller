@@ -28,7 +28,6 @@
 package co.edu.uniandes.csw.Matisse.sesion.persistence;
 
 import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
-import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
 import co.edu.uniandes.csw.Matisse.sesion.persistence.api.ISesionPersistence;
 import co.edu.uniandes.csw.Matisse.sesion.persistence.converter.SesionConverter;
@@ -36,7 +35,6 @@ import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -149,26 +147,12 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
             return null;
         }
     }
-
-    public List<EntradasDTO> darSemanasPorFecha(Date fInicial, Date fFinal) {
-        ArrayList<EntradasDTO>respuesta = new ArrayList<EntradasDTO>();
-        Query count = entityManager.createNativeQuery("select distinct(semanaAnual) from sesionEntity where fecha between ? and ?");
-        count.setParameter(1, fInicial,TemporalType.TIMESTAMP);
-        count.setParameter(2,fFinal,TemporalType.TIMESTAMP);
-        List<Object[]> lista = count.getResultList();
-        Object[] arreglo = lista.toArray();
-        for (Object obj : arreglo) {
-            EntradasDTO nueva = new EntradasDTO();
-            nueva.setValue((Integer) obj);
-            respuesta.add(nueva);
-        }
-        return respuesta;
-    }
     
     private String dateToString(Date d){
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(d);
     }
+    
     private String darNombreSerie(Date inicio, Date fin){
         return inicio.equals(fin)?dateToString(inicio):dateToString(inicio)+" - "+dateToString(fin);
     }

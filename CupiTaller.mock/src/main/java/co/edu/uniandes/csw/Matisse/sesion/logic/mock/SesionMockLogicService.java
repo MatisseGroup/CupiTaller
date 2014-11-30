@@ -28,14 +28,11 @@
 
 package co.edu.uniandes.csw.Matisse.sesion.logic.mock;
 import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
-import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
-import javax.enterprise.inject.Alternative;
 import javax.inject.Singleton;
 
 import co.edu.uniandes.csw.Matisse.sesion.logic.api.ISesionLogicService;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
 import java.util.Date;
-import java.util.List;
 @Singleton
 public class SesionMockLogicService extends _SesionMockLogicService implements ISesionLogicService {
 

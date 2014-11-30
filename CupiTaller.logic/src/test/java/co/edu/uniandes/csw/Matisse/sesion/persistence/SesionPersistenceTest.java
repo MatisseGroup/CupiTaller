@@ -102,17 +102,17 @@ public class SesionPersistenceTest {
 	}
 
 	private List<SesionEntity> data=new ArrayList<SesionEntity>();
-
+        private Date fecha = new Date(Calendar.getInstance().getTimeInMillis());
 	private void insertData() {
 		for(int i=0;i<3;i++){
 			SesionEntity entity=new SesionEntity();
 			entity.setName(generateRandom(String.class));
 			entity.setEstado("Cancelado");
-			entity.setFecha(generateRandom(Date.class));
+			entity.setFecha(fecha);
 			entity.setSemanaAnual(32);
 			entity.setDia(generateRandom(String.class));
 			entity.setEstudianteId(generateRandom(Long.class));
-			entity.setMonitorId(generateRandom(Long.class));
+			entity.setMonitorId((long)1);
 			em.persist(entity);
 			data.add(entity);
 		}
@@ -245,10 +245,48 @@ public class SesionPersistenceTest {
 	}
         
         @Test
-        public void darEstadisticasSemanaTest(){
-            //SemanaDTO semana=sesionPersistence.darEstadisticaPorSemana(32);
-            //Assert.assertNotNull(semana);
-            //Assert.assertTrue(semana.getValue().length==3);
-            //Assert.assertTrue(semana.getLabel()[0].equals("Cancelado"));
+        public void darEstadisticasPorFechaTest(){
+            SemanaDTO dto= sesionPersistence.darEstadisticaPorFechas(fecha, fecha);
+            Assert.assertTrue(dto.getValue().length==1);
+            Assert.assertTrue(dto.getValue()[0]==3);
+            Assert.assertTrue(dto.getLabel()[0].equals("Cancelado"));
+            Assert.assertNotNull(dto.getName());
         }
+        
+        @Test
+        public void darEstadisticasPorFechaTest2(){
+            SemanaDTO dto= sesionPersistence.darEstadisticaPorFechas(null, null);
+            Assert.assertTrue(dto.getValue().length==1);
+            Assert.assertTrue(dto.getValue()[0]==3);
+            Assert.assertTrue(dto.getLabel()[0].equals("Cancelado"));
+            Assert.assertNotNull(dto.getName());
+        }
+        
+        @Test
+        public void darEstadisticasPorMonitorTest(){
+            SemanaDTO dto= sesionPersistence.estadisticasMonitor(1, fecha, fecha);
+            Assert.assertTrue(dto.getValue().length==1);
+            Assert.assertTrue(dto.getValue()[0]==3);
+            Assert.assertTrue(dto.getLabel()[0].equals("Cancelado"));
+            Assert.assertNotNull(dto.getName());
+        }
+        
+        @Test
+        public void darSesionesPorSemanaTest(){
+            SesionPageDTO dto= sesionPersistence.darSesionesPorSemana(1, 100, 32);
+            Assert.assertNotNull(dto);
+            Assert.assertTrue(dto.getRecords().size()==3);
+            
+            SesionPageDTO dto2= sesionPersistence.darSesionesPorSemana(1, 100, 1);
+            Assert.assertNotNull(dto2);
+            Assert.assertTrue(dto2.getRecords().isEmpty());
+        }
+        
+        
+        
+        
+        
+        
+        
+        
 }
