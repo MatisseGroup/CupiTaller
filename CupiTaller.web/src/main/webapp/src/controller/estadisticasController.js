@@ -129,7 +129,7 @@ function agregarAComparar(){
 	var inic = jQuery.trim(split[0]);
 	var fin = jQuery.trim(split[1]);
 	var select = document.getElementById("compararOpciones");
-	var agregar = true;
+	var agregar = formData["fechas"]!=='';
 	for (i = 0; i < select.options.length && agregar; i++) {
   		agregar = select.options[i].value !== formData["fechas"];
 	}
