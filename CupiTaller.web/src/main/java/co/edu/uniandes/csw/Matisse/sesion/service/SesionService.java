@@ -31,16 +31,23 @@ package co.edu.uniandes.csw.Matisse.sesion.service;
 import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
 import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -58,32 +65,34 @@ public class SesionService extends _SesionService {
 
     @GET
     @Path("estadistica")
-    public SemanaDTO darEstadisticasPorSemana(@QueryParam("semanaAnual")Integer semana) {
-        if(semana==null){
-            semana = sesionLogicService.darUltimaSemana();
+    public SemanaDTO darEstadisticasPorFechas(@QueryParam("inicial")String inicial, @QueryParam("final")String fin) {
+        try {
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date fInicial = df.parse(inicial);
+            Date fFinal = df.parse(fin);
+            return sesionLogicService.darEstadisticaPorFechas(fInicial,fFinal);
+        } 
+        catch (ParseException e) {
+            return sesionLogicService.darEstadisticaPorFechas(null,null);
         }
-        return sesionLogicService.darEstadisticaPorSemana(semana);
     }
     
     @GET
-    @Path("compararSemanas")
+    @Path("compararFechas")
     public List<SemanaDTO> compararEstadisticasPorSemana() {
         ArrayList<SemanaDTO> respuesta = new ArrayList<SemanaDTO>();
-        MultivaluedMap<String, String> queryParams = uriInfo.getQueryParameters();
-        Collection<List<String>> semanas = queryParams.values();
-        if(semanas.size()==0){
-            int ultima = sesionLogicService.darUltimaSemana();
-            for(int i = 0; i<4 && ultima>0;i++){
-                respuesta.add(darEstadisticasPorSemana(ultima));
-                ultima--;
+        try {
+            MultivaluedMap<String, String> queryParams = uriInfo.getQueryParameters();
+            for (int i=0;i<queryParams.values().size()/2;i++) {
+                String inicio = URLDecoder.decode(queryParams.getFirst("semanas["+i+"][inicial]"), "UTF-8");
+                String fin = URLDecoder.decode(queryParams.getFirst("semanas["+i+"][fin]"), "UTF-8");
+                SemanaDTO dto = darEstadisticasPorFechas(inicio,fin);
+                respuesta.add(dto);
             }
         }
-        else{
-            for(String semana: semanas.iterator().next()){
-                respuesta.add(darEstadisticasPorSemana(Integer.parseInt(semana)));
-            }
+        catch (UnsupportedEncodingException ex) {
+            System.out.println("Error leyendo fechas");
         }
-        
         return respuesta; 
     }
     
@@ -95,16 +104,19 @@ public class SesionService extends _SesionService {
     }
     
     @GET
-    @Path("opcionesSemana")
-    public List<EntradasDTO>darSemanas(){
-        return sesionLogicService.darSemanas();
-    }
-    
-    @GET
     @Path("sesionesMonitor")
-    public SemanaDTO darEstadisticasPorMonitor(@QueryParam("idMonitor")Integer monitor) {
-        return sesionLogicService.darEstadisticaPorMonitor(monitor);
-    }
+    public SemanaDTO darEstadisticasPorMonitor(@QueryParam("idMonitor")Integer monitor,@QueryParam("inicial")String inicial, @QueryParam("final")String fin) {
+         try {
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date fInicial = df.parse(inicial);
+            Date fFinal = df.parse(fin);
+            return sesionLogicService.darEstadisticaPorMonitor(monitor,fInicial,fFinal);
+        } 
+        catch (ParseException e) {
+            System.out.println("Error leyendo fechas");
+        }
+        return new SemanaDTO();
+    } 
     
     @GET
     @Path("/report")

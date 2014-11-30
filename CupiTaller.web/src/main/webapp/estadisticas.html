@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Observatorio CupiTaller</title>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Observatorio CupiTaller</title>
 
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,67 +20,130 @@
 	
 	<!-- Custom Fonts -->
 	<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-	<!-- Javascript -->
-	<script src="./js/vendor/jquery-1.9.1.js"></script>
-	<script src="./js/vendor/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./js/vendor/myJs.js"></script>
-	<script type="text/javascript" src="./js/vendor/highcharts.js"></script>
-	<script type="text/javascript" src="./js/vendor/exporting.js"></script>
-	<script src="src/controller/estadisticasController.js"></script>
-        
-        
-	<script type="text/javascript">
-		 window.onload = function() {
-            mostrarTemplate('estadisticaInicioTemplate');
-            consultarEstadisticasSemana(false);
-            configurarSemanas();
-         };
-	</script>
-        <style>
-            .highcharts-background{
-                fill:transparent;
-            }
-        </style>
-        
-    </head>
-
+	<link href="css/jquery.datepick.css" rel="stylesheet" > 
 	
 
-	<body>
+	<!-- Javascript -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/vendor/myJs.js"></script>
+	<script type="text/javascript" src="./js/vendor/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/vendor/highcharts.js"></script>
+	<script type="text/javascript" src="./js/vendor/exporting.js"></script>
+	<script type="text/javascript" src="./js/vendor/jquery.plugin.js"></script> 
+	<script type="text/javascript" src="./js/vendor/jquery.datepick.js"></script>
+	<script type="text/javascript" src="./js/vendor/jquery.datepick-es.js"></script>
+	<script type="text/javascript" src="./js/vendor/jquery.datepick.ext.js"></script>
+	<script src="src/controller/estadisticasController.js"></script>
+	<style>
+		.highcharts-background{
+			fill:transparent;
+		}
+	</style>
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-default " role="navigation">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-                
-              <a class="navbar-brand" href="index2.html"><i class="fa fa-eye"></i>  Observatorio</a>
-            </div>
+</head>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="sesion.html">Citas</a></li>
-                <li><a href="encuesta.html">Encuestas</a></li>
-                <li class="active"><a href="estadisticas.html">Estad&iacute;sticas</a></li> 
-                <li><a href="monitor.html">Monitores</a></li>
-                <li><a href="index.html">Cerrar sesi&oacute;n</a></li>
-              </ul>
-        </nav>
-		<div class="container">
-			
-			<div id="main">
+<body>
 
-			</div>	
-		</div>
+	<!-- Navigation -->
+	<nav class="navbar navbar-default " role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+				
+			  <a class="navbar-brand" href="index2.html"><i class="fa fa-eye"></i>  Observatorio</a>
+			</div>
 
-	</body>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="sesion.html">Citas</a></li>
+					<li><a href="encuesta.html">Encuestas</a></li>
+					<li class="active"><a href="estadisticas.html">Estad&iacute;sticas</a></li> 
+					<li><a href="monitor.html">Monitores</a></li>
+					<li><a href="index.html">Cerrar sesi&oacute;n</a></li>
+				</ul>
+			</nav>
+			<div class="container">
 
-</html>
+				<div id="main">
+					<div class = "row ">
+						<div class="col-md-2 ">
+							<ul class="nav nav-tab nav-pills" role="tablist">
+								<li role="presentation" class="active"><a href="#firstTab" role="tab" data-toggle="tab">Gr&aacute;fico por rango de fechas</a></li>
+								<li role="presentation" data-toggle="tab" ><a href="#secondTab" role="tab" data-toggle="tab">Comparar fechas</a></li>
+								<li role="presentation" data-toggle="tab"><a href="#thirdTab" role="tab" data-toggle="tab">Gr&aacute;fico por monitor</a></li>
+							</ul>
+						</div>
+						<div class="tab-content col-md-10">
+							<div class="tab-pane active" role="tabpanel" id="firstTab">
+								<div class="well row">
+									<form id="formSemana" role="form" class="form-group">
+
+										<label for="pickerSencillo">Seleccione un rango de fechas</label>
+										<input type="text" id="pickerSencillo" class="form-control" name="fechas">
+										<br>
+										<input type="submit" class="btn btn-default" value="Buscar" >
+									</form>
+								</div>
+
+								<div class ="row" id="grafica" style="width:900px; height: 400px; margin: 0 auto">
+
+								</div>
+
+							</div>
+
+							<div class="tab-pane" role="tabpanel" id="secondTab">
+								<div class="row">
+									<div class="well">
+										<form id="formComparar" role="form">
+											<label for="pickerMultiple">Seleccione fechas o rangos de fechas a comparar</label>
+											<input type="text" id="pickerMultiple" class="form-control" name="fechas">
+											<br>
+											<label for="compararOpciones">Opciones seleccionadas</label>
+											<select multiple class="form-control" name="semanas" id="compararOpciones">
+
+											</select>
+											<br>
+											<input type="submit" class="btn btn-default" value="comparar"></input>
+										</form>
+									</div>
+								</div> 
+								<div class="row" id="graficaComparar">
+								</div>
+
+							</div>
+
+							<div class="tab-pane" role="tabpanel" id="thirdTab">
+								<div class="tab-pane active" role="tabpanel" id="firstTab">
+									<div class="well row">
+										<form id="formMonitor" role="form">
+											<label for="pickerMonitor">Seleccione un rango de fecha</label>
+											<input type="text" id="pickerMonitor" class="form-control" name="fechas">
+											<br>
+											<label for="idMonitor">Seleccione un monitor</label>
+											<br>
+											<select class="form-control" name = "idMonitor" id = "opcionesMonitor"></select> 
+											<br>
+											<input type="submit" class="btn btn-default" value="Buscar" >
+										</form>
+									</div>
+
+									<div class ="row" id="graficaMonitor" style="width:900px; height: 400px; margin: 0 auto">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<br><br>
+
+					</div>	
+				</div>
+			</body>
+
+			</html>

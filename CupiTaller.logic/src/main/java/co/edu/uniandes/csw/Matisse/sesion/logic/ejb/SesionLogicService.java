@@ -39,6 +39,7 @@ import javax.enterprise.inject.Default;
 
 import co.edu.uniandes.csw.Matisse.sesion.logic.api.ISesionLogicService;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.Date;
 import java.util.List;
 
 @Default
@@ -47,24 +48,16 @@ import java.util.List;
 
 public class SesionLogicService extends _SesionLogicService implements ISesionLogicService {
 
-    public SemanaDTO darEstadisticaPorSemana(int semana) {
-        return persistance.darEstadisticaPorSemana(semana);
+    public SemanaDTO darEstadisticaPorFechas(Date fInicial,Date fFinal) {
+        return persistance.darEstadisticaPorFechas(fInicial,fFinal);
     }
 
     public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana) {
         return persistance.darSesionesPorSemana(page,maxRecords,semana);
     }
 
-    public Integer darUltimaSemana() {
-        return persistance.darUltimaSemana();
-    }
-    
-    public List<EntradasDTO>darSemanas(){
-        return persistance.darSemanas();
-    }
-
-    public SemanaDTO darEstadisticaPorMonitor(Integer monitor) {
-        return persistance.estadisticasMonitor(monitor);
+    public SemanaDTO darEstadisticaPorMonitor(Integer monitor,Date fInicial,Date fFinal) {
+        return persistance.estadisticasMonitor(monitor,fInicial,fFinal);
     }
 
     public byte[] getReport() {

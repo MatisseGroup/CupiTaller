@@ -1,5 +1,4 @@
 function mostrarTemplate(view) {
-    console.log("entro");
     $.ajax({
         url: 'src/view/' + view + '.html',
         method: 'GET',
@@ -7,7 +6,6 @@ function mostrarTemplate(view) {
         contentType: 'text/html',
         dataType: 'html',
         success: function(data) {
-            console.log(data);
             var mydiv = $('#main');
             while ( mydiv.firstChild ) mydiv.removeChild( mydiv.firstChild );
             mydiv.append($(data));

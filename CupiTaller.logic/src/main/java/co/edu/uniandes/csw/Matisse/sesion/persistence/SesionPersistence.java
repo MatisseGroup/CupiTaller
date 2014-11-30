@@ -29,21 +29,16 @@ package co.edu.uniandes.csw.Matisse.sesion.persistence;
 
 import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
 import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
-import co.edu.uniandes.csw.Matisse.entradas.persistence.converter.EntradasConverter;
-import co.edu.uniandes.csw.Matisse.entradas.persistence.converter._EntradasConverter;
-import co.edu.uniandes.csw.Matisse.entradas.persistence.entity.EntradasEntity;
-import co.edu.uniandes.csw.Matisse.monitor.persistence.MonitorPersistence;
-import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
 import co.edu.uniandes.csw.Matisse.sesion.persistence.api.ISesionPersistence;
 import co.edu.uniandes.csw.Matisse.sesion.persistence.converter.SesionConverter;
 import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -51,8 +46,8 @@ import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
-import javax.persistence.Parameter;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -66,24 +61,37 @@ import net.sf.jasperreports.engine.JasperReport;
 
 public class SesionPersistence extends _SesionPersistence implements ISesionPersistence {
 
-    public SemanaDTO darEstadisticaPorSemana(int semana) {
-        String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where semanaAnual = ? group by estado order by estado)co on dis.label=co.label)";
-        Query q = entityManager.createNativeQuery(query);
-        q.setParameter(1,semana);
+    public SemanaDTO darEstadisticaPorFechas(Date fInicial,Date fFinal) {
+        Query q;
+        String name;
+        if(fInicial != null && fFinal != null){
+            String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where fecha between ? and ? group by estado order by estado)co on dis.label=co.label)";
+            q = entityManager.createNativeQuery(query);
+            q.setParameter(1, fInicial,TemporalType.TIMESTAMP);
+            q.setParameter(2,fFinal,TemporalType.TIMESTAMP);
+            name=darNombreSerie(fInicial,fFinal);
+        }
+        else{
+            String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where fecha = (select max(fecha) from SESIONENTITY) group by estado order by estado)co on dis.label=co.label)";
+            q = entityManager.createNativeQuery(query);
+            String queryFecha = "select max(fecha) from SESIONENTITY";
+            Query qf = entityManager.createNativeQuery(queryFecha);
+            Date fecha = new Date (((java.sql.Date)qf.getSingleResult()).getTime());
+            name = dateToString(fecha);
+        }
         List<Object[]> lista = q.getResultList();
-        SemanaDTO sem = new SemanaDTO();
+        SemanaDTO semana = new SemanaDTO();
         String[] labels = new String[lista.size()];
         Integer[] values = new Integer[lista.size()];
-        String name = "Semana " + semana;
         for(int i=0;i<lista.size();i++){
             Object actual[] = lista.get(i);
             labels[i] = (String)actual[0];
             values[i] = (Integer)actual[1];
         }
-        sem.setName(name);
-        sem.setLabel(labels);
-        sem.setValue(values);
-        return sem;
+        semana.setName(name);
+        semana.setLabel(labels);
+        semana.setValue(values);
+        return semana;
     }
 
     public SesionPageDTO darSesionesPorSemana(Integer page, Integer maxRecords, Integer semana) {
@@ -103,29 +111,13 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
         return response;
     }
 
-    public Integer darUltimaSemana() {
-        Query count = entityManager.createNativeQuery("select max(u.semanaAnual) from SesionEntity u");
-	Integer regCount = Integer.parseInt(count.getSingleResult().toString());
-        return regCount;
-    }
-    
-    public List<EntradasDTO>darSemanas(){
-        ArrayList<EntradasDTO>respuesta = new ArrayList<EntradasDTO>();
-        Query count = entityManager.createNativeQuery("select distinct(semanaAnual) from sesionEntity");
-        List<Object[]> lista = count.getResultList();
-        Object[] arreglo = lista.toArray();
-        for(int i = 0; i<arreglo.length;i++){
-            EntradasDTO nueva = new EntradasDTO();
-            nueva.setValue((Integer)arreglo[i]);
-            respuesta.add(nueva);
-        }
-        return respuesta;
-    }
-
-    public SemanaDTO estadisticasMonitor(Integer monitor) {
-        String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where monitorid = ? group by estado order by estado)co on dis.label=co.label)";
+    public SemanaDTO estadisticasMonitor(Integer monitor,Date fInicial,Date fFinal) {
+        String name = (String)entityManager.createNativeQuery("select name from MONITORENTITY where id = ? ").setParameter(1, monitor).getSingleResult();
+        String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where monitorid = ? and fecha between ? and ? group by estado order by estado)co on dis.label=co.label)";
         Query q = entityManager.createNativeQuery(query);
         q.setParameter(1,monitor);
+        q.setParameter(2,fInicial);
+        q.setParameter(3,fFinal);
         List<Object[]> lista = q.getResultList();
         SemanaDTO sem = new SemanaDTO();
         String[] labels = new String[lista.size()];
@@ -135,6 +127,7 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
             labels[i] = (String)actual[0];
             values[i] = (Integer)actual[1];
         }
+        sem.setName(name);
         sem.setLabel(labels);
         sem.setValue(values);
         return sem;
@@ -155,5 +148,28 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
             Logger.getLogger(SesionPersistence.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    public List<EntradasDTO> darSemanasPorFecha(Date fInicial, Date fFinal) {
+        ArrayList<EntradasDTO>respuesta = new ArrayList<EntradasDTO>();
+        Query count = entityManager.createNativeQuery("select distinct(semanaAnual) from sesionEntity where fecha between ? and ?");
+        count.setParameter(1, fInicial,TemporalType.TIMESTAMP);
+        count.setParameter(2,fFinal,TemporalType.TIMESTAMP);
+        List<Object[]> lista = count.getResultList();
+        Object[] arreglo = lista.toArray();
+        for (Object obj : arreglo) {
+            EntradasDTO nueva = new EntradasDTO();
+            nueva.setValue((Integer) obj);
+            respuesta.add(nueva);
+        }
+        return respuesta;
+    }
+    
+    private String dateToString(Date d){
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(d);
+    }
+    private String darNombreSerie(Date inicio, Date fin){
+        return inicio.equals(fin)?dateToString(inicio):dateToString(inicio)+" - "+dateToString(fin);
     }
 }

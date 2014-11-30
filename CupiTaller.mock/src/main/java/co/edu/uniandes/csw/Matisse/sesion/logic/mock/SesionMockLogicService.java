@@ -34,27 +34,19 @@ import javax.inject.Singleton;
 
 import co.edu.uniandes.csw.Matisse.sesion.logic.api.ISesionLogicService;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.Date;
 import java.util.List;
 @Singleton
 public class SesionMockLogicService extends _SesionMockLogicService implements ISesionLogicService {
 
-    public SemanaDTO darEstadisticaPorSemana(int semana) {
+    public SemanaDTO darEstadisticaPorFechas(Date fInicial,Date fFinal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public Integer darUltimaSemana() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public List<EntradasDTO> darSemanas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public SemanaDTO darEstadisticaPorMonitor(Integer monitor) {
+    public SemanaDTO darEstadisticaPorMonitor(Integer monitor,Date fInicial,Date fFinal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

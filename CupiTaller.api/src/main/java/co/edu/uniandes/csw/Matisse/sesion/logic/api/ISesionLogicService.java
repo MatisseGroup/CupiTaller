@@ -31,19 +31,16 @@ package co.edu.uniandes.csw.Matisse.sesion.logic.api;
 import co.edu.uniandes.csw.Matisse.Semana.logic.dto.SemanaDTO;
 import co.edu.uniandes.csw.Matisse.entradas.logic.dto.EntradasDTO;
 import co.edu.uniandes.csw.Matisse.sesion.logic.dto.SesionPageDTO;
+import java.util.Date;
 import java.util.List;
 
 public interface ISesionLogicService extends _ISesionLogicService {
 
-    public SemanaDTO darEstadisticaPorSemana(int semana);
+    public SemanaDTO darEstadisticaPorFechas(Date fInicial,Date fFinal);
 
     public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana);
 
-    public Integer darUltimaSemana();
-    
-    public List<EntradasDTO>darSemanas();
-
-    public SemanaDTO darEstadisticaPorMonitor(Integer monitor);
+    public SemanaDTO darEstadisticaPorMonitor(Integer monitor,Date fInicial,Date fFinal);
 
     public byte[] getReport();
 
