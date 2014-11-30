@@ -12,8 +12,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -36,7 +34,6 @@ public class ServiciosAPI {
     // ------------------------------
     // Atributos
     // ------------------------------
-
     private static final String url = "http://localhost/index.php?r=admin/remotecontrol";
     private static HttpPost post;
     private static HttpClient cliente;
@@ -46,7 +43,6 @@ public class ServiciosAPI {
     // -----------------------------
     // Constructor
     // -----------------------------
-
     private ServiciosAPI() {
         cliente = HttpClients.createDefault();
         post = new HttpPost(url);
@@ -57,9 +53,8 @@ public class ServiciosAPI {
     // ----------------------------
     // Metodos utiles para el app
     // ----------------------------
-    
-    public static ServiciosAPI getInstance(){
-        return (instance == null) ? instance = new ServiciosAPI():instance;
+    public static ServiciosAPI getInstance() {
+        return (instance == null) ? instance = new ServiciosAPI() : instance;
     }
 
     public static String parse(String jsonLine) {
@@ -69,62 +64,65 @@ public class ServiciosAPI {
         return result;
     }
 
-    public static String getSessionKey()  {
-        try{
+    public static String getSessionKey() {
+        try {
             post.setEntity(new StringEntity("{\"method\": "
-                + "\"get_session_key\", "
-                + "\"params\": {\"username\": \"admin\", \"password\": "
-                + "\"password\" }, \"id\": 1}"));
-                HttpResponse response = cliente.execute(post);
-                if (response.getStatusLine().getStatusCode() == 200) {
-                    HttpEntity entidad = response.getEntity();
-                    key = parse(EntityUtils.toString(entidad));
-                }
+                    + "\"get_session_key\", "
+                    + "\"params\": {\"username\": \"admin\", \"password\": "
+                    + "\"password\" }, \"id\": 1}"));
+            HttpResponse response = cliente.execute(post);
+            if (response.getStatusLine().getStatusCode() == 200) {
+                HttpEntity entidad = response.getEntity();
+                key = parse(EntityUtils.toString(entidad));
+            }
         } catch (IOException e) {
             System.err.println("error para conseguir el key");
         } catch (ParseException e) {
             System.err.println("error para conseguir el key");
         }
-            return key;
+        return key;
     }
 
     public String transformFromB64(String toConvert) {
-            return new String(Base64.decodeBase64(toConvert));
+        return new String(Base64.decodeBase64(toConvert));
     }
 
     public JSONObject getQuestionsProperties(int qId) {
         JSONObject pedido = new JSONObject();
         try {
             JsonObject request = new JsonObject();
-		JsonObject params = new JsonObject();
-		request.addProperty("id", 1);
-		request.addProperty("method", "get_question_properties");
+            JsonObject params = new JsonObject();
+            request.addProperty("id", 1);
+            request.addProperty("method", "get_question_properties");
 
-		params.addProperty("sSessionKey", key);
-		
-		params.addProperty("iQuestionID", qId);
-		JsonArray jsonarray = new JsonArray();
-		JsonPrimitive qid = new JsonPrimitive("qid");
-		JsonPrimitive title = new JsonPrimitive("title");
-		JsonPrimitive answeroptions = new JsonPrimitive("answeroptions");
-		JsonPrimitive questions = new JsonPrimitive("question");
-		jsonarray.add(qid);
-		jsonarray.add(title);
-		jsonarray.add(answeroptions);
-		jsonarray.add(questions);
-		params.add("aQuestionSettings", jsonarray);
-		request.add("params", params);
+            params.addProperty("sSessionKey", key);
+
+            params.addProperty("iQuestionID", qId);
+            JsonArray jsonarray = new JsonArray();
+            JsonPrimitive qid = new JsonPrimitive("qid");
+            JsonPrimitive title = new JsonPrimitive("title");
+            JsonPrimitive answeroptions = new JsonPrimitive("answeroptions");
+            JsonPrimitive questions = new JsonPrimitive("question");
+            jsonarray.add(qid);
+            jsonarray.add(title);
+            jsonarray.add(answeroptions);
+            jsonarray.add(questions);
+            params.add("aQuestionSettings", jsonarray);
+            request.add("params", params);
             post.setEntity(new StringEntity(request.toString()));
             HttpResponse response = cliente.execute(post);
             if (response.getStatusLine().getStatusCode() == 200) {
-               HttpEntity entidad = response.getEntity();
+                HttpEntity entidad = response.getEntity();
                 JSONObject json = new JSONObject(EntityUtils.toString(entidad));
-		pedido = new JSONObject(json.getString("result"));
+                pedido = json.getJSONObject("result");
             }
             return pedido;
         } catch (UnsupportedEncodingException ex) {
+            ex.printStackTrace();
         } catch (IOException ex) {
+            ex.printStackTrace();
         } catch (JSONException ex) {
+            ex.printStackTrace();
         }
         return null;
     }
@@ -145,49 +143,26 @@ public class ServiciosAPI {
             if (response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entidad = response.getEntity();
                 JSONObject json = new JSONObject(EntityUtils.toString(entidad));
-		pedido = json.getJSONArray("result");
+                pedido = json.getJSONArray("result");
             }
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
         } catch (JSONException ex) {
+            ex.printStackTrace();
         }
         return pedido;
     }
 
-    public JSONArray listGroups(int survey){
-        JSONArray pedido = new JSONArray();
-        JsonObject request = new JsonObject();
-		JsonObject params = new JsonObject();
-
-		request.addProperty("id", 1);
-		request.addProperty("method", "list_groups");
-        params.addProperty("sSessionKey", key);
-        params.addProperty("iSurveyID", survey);
-        request.add("params", params);
-        try {
-            post.setEntity(new StringEntity(request.toString()));
-            HttpResponse response = cliente.execute(post);
-            if (response.getStatusLine().getStatusCode() == 200) {
-                HttpEntity entidad = response.getEntity();
-                JSONObject json = new JSONObject(EntityUtils.toString(entidad));
-		pedido = json.getJSONArray("result");
-            }
-        } catch (UnsupportedEncodingException e) {
-        } catch (IOException e) {
-        } catch (JSONException ex){
-        }
-        return pedido;
-    }
-
-    @Deprecated
-    public JSONArray getStadistics(int survey) {
+    public JSONArray listGroups(int survey) {
         JSONArray pedido = new JSONArray();
         JsonObject request = new JsonObject();
         JsonObject params = new JsonObject();
-        request.addProperty("method", "export_statistics");
+        request.addProperty("id", 1);
+        request.addProperty("method", "list_groups");
         params.addProperty("sSessionKey", key);
         params.addProperty("iSurveyID", survey);
-        params.addProperty("docType", "json");
         request.add("params", params);
         try {
             post.setEntity(new StringEntity(request.toString()));
@@ -195,15 +170,18 @@ public class ServiciosAPI {
             if (response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entidad = response.getEntity();
                 JSONObject json = new JSONObject(EntityUtils.toString(entidad));
-		pedido = json.getJSONArray("result");
+                pedido = json.getJSONArray("result");
             }
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
         } catch (JSONException ex) {
+            ex.printStackTrace();
         }
         return pedido;
     }
-    
+
     public JSONObject exportResponses() {
         JSONObject pedido = new JSONObject();
         JsonObject request = new JsonObject();
@@ -220,13 +198,16 @@ public class ServiciosAPI {
             if (response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entidad = response.getEntity();
                 JSONObject json = new JSONObject(EntityUtils.toString(entidad));
-		String result = transformFromB64(json.getString("result"));
+                String result = transformFromB64(json.getString("result"));
                 pedido = new JSONObject(result);
             }
         } catch (UnsupportedEncodingException ex) {
         } catch (IOException ex) {
+            ex.printStackTrace();
         } catch (ParseException ex) {
+            ex.printStackTrace();
         } catch (JSONException ex) {
+            ex.printStackTrace();
         }
         return pedido;
     }

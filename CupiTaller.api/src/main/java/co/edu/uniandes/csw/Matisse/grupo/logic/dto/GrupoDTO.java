@@ -13,11 +13,11 @@ import java.util.List;
  * @author Jairo
  */
 public class GrupoDTO {
-    
+
     private List<PreguntaDTO> preguntas;
-    
+
     private String name;
-    
+
     private Integer id;
 
     public List<PreguntaDTO> getPreguntas() {
@@ -43,6 +43,5 @@ public class GrupoDTO {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    
+
 }

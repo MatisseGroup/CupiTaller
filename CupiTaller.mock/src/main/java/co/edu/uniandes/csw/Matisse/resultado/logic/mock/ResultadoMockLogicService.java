@@ -33,14 +33,16 @@ import javax.inject.Singleton;
 
 import co.edu.uniandes.csw.Matisse.resultado.logic.api.IResultadoLogicService;
 import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
+import java.util.List;
 @Singleton
 public class ResultadoMockLogicService extends _ResultadoMockLogicService implements IResultadoLogicService {
 
-    public ResultadoDTO listarPreguntas(Integer semana) {
+
+    public PreguntaDTO respuestaAPregunta(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public PreguntaDTO respuestaAPregunta(Integer id) {
+    public List<PreguntaDTO> listarPreguntas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 	
