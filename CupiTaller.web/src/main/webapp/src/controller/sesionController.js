@@ -55,35 +55,6 @@ define(['controller/_sesionController', 'delegate/sesionDelegate'], function () 
               window.myBar.addData(data.datasets[0].data,data.labels);
             }
         },
-        darEstadistica: function (callback, context) {
-            var self = this;
-            var model = $('#' + this.componentId + '-sesionForm').serializeObject();
-            this.currentModel.set(model);
-            var delegate = new App.Delegate.SesionDelegate();
-            delegate.darEstadistica(self.currentModel, function (data) {
-                var labs = [];
-                var vals = [];
-                for(var i = 0; i<data.length;i++){
-                    labs[i] = data[i].label;
-                    vals[i] = data[i].value;
-                }
-                var barChartData = {
-                    labels: labs,
-                    datasets: [
-                        {
-                            fillColor: "rgba(220,220,220,0.5)",
-                            strokeColor: "rgba(220,220,220,0.8)",
-                            highlightFill: "rgba(220,220,220,0.75)",
-                            highlightStroke: "rgba(220,220,220,1)",
-                            data: vals
-                        }
-                    ]
-                };
-                self.cargarGrafica(barChartData);
-            }, function (data) {
-                Backbone.trigger(self.componentId + '-' + 'error', {event: 'sesion-search', view: self, id: '', data: data, error: 'Error in sesion search'});
-            });
-        },
         buscarSesionesPorSemana: function(callback,context){
             var self = this;
             var model = $('#' + this.componentId + '-sesionForm').serializeObject();

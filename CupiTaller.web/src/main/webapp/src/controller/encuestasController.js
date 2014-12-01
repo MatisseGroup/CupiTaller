@@ -13,7 +13,7 @@ function consultarResultadoPregunta() {
         contentType: 'application/json',
         success: function(data) {
             var myDiv = $('#grafica');
-            drawTable(myDiv, 'Resultados de pregunta ' + formData.pregunta, 'Estado', 'Cantidad', 1, data);
+            drawTable(myDiv, '', 'Estado', 'Cantidad', 1, data);
         }
     });
 }
@@ -54,7 +54,7 @@ $.fn.serializeFormJSON = function() {
 };
 
 function drawTable(div, titulo, x, y, series, data) {
-    var preg = data.pregunta;
+    var preg = data.pregunta.replace("&iquest;","¿");
     var pieData = [];
     var labs = data["opciones"];
     var vals = data["valores"];

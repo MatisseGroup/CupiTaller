@@ -102,7 +102,6 @@
             this.toolbarComponent.hideButton('cancelar-busqueda');
             this.toolbarComponent.render();
             this.componentController.buscarSesionesPorSemana(this.list,this);
-            this.componentController.darEstadistica(this.list,this);
         },
         
         print:  function(){
