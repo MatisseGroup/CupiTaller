@@ -32,11 +32,11 @@ define(['component/_CRUDComponent', 'model/monitorModel', 'controller/monitorCon
         listModelClass: App.Model.MonitorList,
         controller : App.Controller.MonitorController,
         configUI: function(){
-        	this.listComponent.addColumn('name','Name');
-        	this.listComponent.addColumn('activo','Activo');
+        	this.listComponent.addColumn('name','Nombre');
+        	//this.listComponent.addColumn('activo','Activo');
         	this.listComponent.addColumn('usuario','Usuario');
-        	this.listComponent.addColumn('puntosNegativos','Puntos Negativos');
         	this.listComponent.addColumn('carrera','Carrera');
+          this.listComponent.addColumn('puntosNegativos','Puntos Negativos');
         	this.listComponent.addColumn('llegadasTarde','Llegadas Tarde');
         }
     });

@@ -34,15 +34,24 @@ define(['model/_monitorModel'], function() {
             if(!attrs.name){
                 validationMessage = "El nombre no puede ser vacio";
             }
+            else if(attrs.puntosNegativos<0){
+              validationMessage="El valor de puntos negativos debe ser positivo";
+            }
             else if(!attrs.puntosNegativos){
               validationMessage="El campo de puntos negativos no puede ser vacio";
             }           
             else if(!attrs.puntosNegativos.match(regExp)){
-              validationMessage="Los puntos deben ser numéricos y sin decimales";
+              validationMessage="Los puntos negativos deben ser numéricos y sin decimales";
             }
 
-            else if(attrs.puntosNegativos<0){
-              validationMessage="El valor ingresado debe ser positivo";
+            else if(attrs.llegadasTarde<0){
+              validationMessage="El valor de llegadas tarde debe ser positivo";
+            }
+            else if(!attrs.llegadasTarde){
+              validationMessage="El campo de llegadas tarde no puede ser vacio";
+            }           
+            else if(!attrs.llegadasTarde.match(regExp)){
+              validationMessage="Las llegadas tarde deben ser numéricas y sin decimales";
             }
             
             if(validationMessage.length>0){
