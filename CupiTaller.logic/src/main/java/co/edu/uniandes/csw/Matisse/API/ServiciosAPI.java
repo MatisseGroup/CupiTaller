@@ -57,14 +57,14 @@ public class ServiciosAPI {
         return (instance == null) ? instance = new ServiciosAPI() : instance;
     }
 
-    public static String parse(String jsonLine) {
+    public String parse(String jsonLine) {
         JsonElement jelement = new JsonParser().parse(jsonLine);
         JsonObject jobject = jelement.getAsJsonObject();
         String result = jobject.get("result").getAsString();
         return result;
     }
 
-    public static String getSessionKey() {
+    public String getSessionKey() {
         try {
             post.setEntity(new StringEntity("{\"method\": "
                     + "\"get_session_key\", "
