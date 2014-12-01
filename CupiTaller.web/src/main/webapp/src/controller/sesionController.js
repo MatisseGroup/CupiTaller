@@ -67,6 +67,19 @@ define(['controller/_sesionController', 'delegate/sesionDelegate'], function () 
                 Backbone.trigger(self.componentId + '-' + 'error', {event: 'sesion-search', view: self, id: '', data: data, error: 'Error in sesion search'});
             });
         },
+        buscarSesionesPorMonitor: function(callback,context){
+            var self = this;
+            var model = $('#' + this.componentId + '-sesionForm').serializeObject();
+            this.currentModel.set(model);
+            var delegate = new App.Delegate.SesionDelegate();
+            delegate.darSesionesPorMonitor(self.currentModel,function (data){
+                self.currentList.reset(data.records);
+                callback.call(context, {data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.length});
+            },function (data) {
+                Backbone.trigger(self.componentId + '-' + 'error', {event: 'sesion-search', view: self, id: '', data: data, error: 'Error in sesion search'});
+            });
+        },
+
         postInit: function(){
             var self=this;
             Backbone.on(this.componentId + '-toolbar-print', function(params) {

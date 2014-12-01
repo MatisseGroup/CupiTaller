@@ -38,6 +38,19 @@ define(['delegate/_sesionDelegate'], function() {
              }, this)).error(_.bind(function(data) {
                  callbackError(data);
              }, this));
+         },
+         darSesionesPorMonitor: function(sesion, callback, callbackError) {
+              $.ajax({
+                  url: '/CupiTaller.web/webresources/Sesion/sesionMonitor',
+                  type: 'GET',
+                  data: $.param(sesion.toJSON()),
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 callback(data);
+             }, this)).error(_.bind(function(data) {
+                 callbackError(data);
+             }, this));
          }
+
     });
 });

@@ -42,4 +42,7 @@ public interface ISesionLogicService extends _ISesionLogicService {
 
     public byte[] getReport();
 
+    public SesionPageDTO getSesionesPorMonitor(Integer page, Integer maxRecords, String usuario);
+
+    
 }

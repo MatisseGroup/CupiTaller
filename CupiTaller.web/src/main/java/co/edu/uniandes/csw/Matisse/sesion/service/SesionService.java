@@ -98,6 +98,13 @@ public class SesionService extends _SesionService {
     }
     
     @GET
+    @Path("sesionMonitor")
+    public SesionPageDTO getSesionesPorMonitor(@QueryParam("usuario")String usuario,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+        return sesionLogicService.getSesionesPorMonitor(page, maxRecords, usuario);
+    }
+
+    
+    @GET
     @Path("sesionesMonitor")
     public SemanaDTO darEstadisticasPorMonitor(@QueryParam("idMonitor")Integer monitor,@QueryParam("inicial")String inicial, @QueryParam("final")String fin) {
          try {
