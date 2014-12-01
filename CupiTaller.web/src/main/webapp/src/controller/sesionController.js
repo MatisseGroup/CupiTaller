@@ -71,6 +71,7 @@ define(['controller/_sesionController', 'delegate/sesionDelegate'], function () 
             var self = this;
             var model = $('#' + this.componentId + '-sesionForm').serializeObject();
             this.currentModel.set(model);
+            this.currentModel.validate();
             var delegate = new App.Delegate.SesionDelegate();
             delegate.darSesionesPorMonitor(self.currentModel,function (data){
                 self.currentList.reset(data.records);

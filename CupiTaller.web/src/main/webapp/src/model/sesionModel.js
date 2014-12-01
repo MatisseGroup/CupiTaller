@@ -31,13 +31,14 @@ define(['model/_sesionModel'], function() {
  	validate: function(attrs,options){
             var validationMessage = "";
             var regExp ="^[0-9]+$"; 
-            if(!attrs.name&&!attrs.monitor){
+            if(attrs.monitor.length == 0){
                 validationMessage = "No pueden estar los campos vacios";
             }
-            else if (attrs.name&&attrs.monitor)
-            {
-                validationMessage = "No puede llenar los dos campos";
-            }
+            
+//            else if (attrs.semanaAnual&&attrs.monitor)
+//            {
+//                validationMessage = "No puede llenar los dos campos";
+//            }
             else if(!attrs.semanaAnual.match(regExp)){
               validationMessage="La semana debe ser numerica y sin decimales";
             }
