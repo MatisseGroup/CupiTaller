@@ -50,6 +50,22 @@ public class SesionMockLogicService extends _SesionMockLogicService implements I
     public byte[] getReport() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public SesionPageDTO getSesionesFecha(Integer page, Integer maxRecords, Date fInicio,Date fFinal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public SesionPageDTO getSesionesMonitor(Integer page, Integer maxRecords, Integer monitorId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public SesionPageDTO getSesionesEstudiante(Integer page, Integer maxRecords, String estudiante) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public SesionPageDTO getSesionesEstado(Integer page, Integer maxRecords, String estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 	
 }

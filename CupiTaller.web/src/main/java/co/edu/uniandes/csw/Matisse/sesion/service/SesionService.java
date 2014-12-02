@@ -91,10 +91,39 @@ public class SesionService extends _SesionService {
         return respuesta; 
     }
     
+     @GET
+    @Path("sesionesFecha")
+    public SesionPageDTO getSesionesFecha(@QueryParam("inicial")String inicial, @QueryParam("final")String fin,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+	try {
+           DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+           Date fInicial = df.parse(inicial);
+           Date fFinal = df.parse(fin);
+           return sesionLogicService.getSesionesFecha(page, maxRecords, fInicial,fFinal);
+        } 
+        catch (ParseException e) {
+            System.out.println("Error leyendo fecha");
+        }
+        return new SesionPageDTO();
+    }
+    
     @GET
-    @Path("sesionesSemana")
-    public SesionPageDTO getSesionesSemana(@QueryParam("semanaAnual")Integer semana,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
-        return sesionLogicService.getSesionesSemana(page, maxRecords, semana);
+    @Path("sesionesPorMonitor")
+    public SesionPageDTO getSesionesMonitor(@QueryParam("monitorId")Integer monitorId,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+        return sesionLogicService.getSesionesMonitor(page, maxRecords, monitorId);
+    }
+    
+    @GET
+    @Path("sesionesEstudiante")
+    public SesionPageDTO getSesionesEstudiante(@QueryParam("estudiante")String estudiante,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+        estudiante = estudiante.toUpperCase();
+        return sesionLogicService.getSesionesEstudiante(page, maxRecords, estudiante);
+    }
+    
+    @GET
+    @Path("sesionesEstado")
+    public SesionPageDTO getSesionesEstado(@QueryParam("estado")String estado,@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+        estado = estado.toUpperCase();
+        return sesionLogicService.getSesionesEstado(page, maxRecords, estado);
     }
     
     @GET

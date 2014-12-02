@@ -38,10 +38,16 @@ public interface ISesionPersistence extends _ISesionPersistence {
 
     public SemanaDTO darEstadisticaPorFechas(Date fInicial,Date fFinal);
 
-    public SesionPageDTO darSesionesPorSemana(Integer page, Integer maxRecords, Integer semana);
-
     public SemanaDTO estadisticasMonitor(Integer monitor,Date fInicial,Date fFinal);
 
     public byte[] getReport();
+
+    public SesionPageDTO darSesionesPorFecha(Integer page, Integer maxRecords, Date fInicio, Date fFinal);
+
+    public SesionPageDTO darSesionesPorMonitor(Integer page, Integer maxRecords, Integer monitorId);
+
+    public SesionPageDTO darSesionesPorEstudiante(Integer page, Integer maxRecords, String estudiante);
+
+    public SesionPageDTO darSesionesPorEstado(Integer page, Integer maxRecords, String estado);
 
 }

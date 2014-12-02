@@ -68,6 +68,7 @@
             },
             this.realizarBusqueda,
             this);
+
             this.toolbarComponent.addButton({
                 name: 'cancelar-busqueda',
                 displayName: 'Cancelar',
@@ -80,8 +81,8 @@
                 this.toolbarComponent.showButton('reporte');
                 this.toolbarComponent.hideButton('realizar-busqueda');
                 this.toolbarComponent.hideButton('cancelar-busqueda');
-                this.toolbarComponent.render();
                 this.componentController.list(null, this.list, this);
+                this.toolbarComponent.render();
             },
             this);      
         },
@@ -93,6 +94,7 @@
             this.toolbarComponent.showButton('cancelar-busqueda');
             this.toolbarComponent.render();
             this.componentController.create();
+            this.componentController.configurarMonitores();
         },
         realizarBusqueda: function(){
             this.toolbarComponent.showButton('buscar');
@@ -101,7 +103,7 @@
             this.toolbarComponent.hideButton('realizar-busqueda');
             this.toolbarComponent.hideButton('cancelar-busqueda');
             this.toolbarComponent.render();
-            this.componentController.buscarSesionesPorSemana(this.list,this);
+            this.componentController.buscarSesiones(this.list,this);
         },
         
         print:  function(){

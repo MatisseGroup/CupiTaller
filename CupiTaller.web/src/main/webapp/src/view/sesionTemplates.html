@@ -1,42 +1,75 @@
+<script type="text/javascript" src="./js/vendor/jquery.plugin.js"></script> 
+<script type="text/javascript" src="./js/vendor/jquery.datepick.js"></script>
+<script type="text/javascript" src="./js/vendor/jquery.datepick-es.js"></script>
+<script type="text/javascript" src="./js/vendor/jquery.datepick.ext.js"></script>
 <script type="text/template" id="sesion">
     <div class="form-group">
+    <%= '<scr'+'ipt>' %>
+                $('#fecha').datepick({
+                  renderer: $.datepick.weekOfYearRenderer, 
+                  firstDay: 1, 
+                  showOtherMonths: true, 
+                  rangeSelect: true, 
+                  onShow: $.datepick.selectWeek,
+                  onDate: $.datepick.noWeekends
+                });
+    <%= '</scr'+'ipt>' %>
+    
         <form role="form" id="<%= componentId %>-sesionForm">
+        
             <% if(sesion.id) {%>
                 <input type="hidden" name="id" value="<%= sesion.id %>"/>
                 <% }%>
-            <div class="form-group" >
-                <h3>Buscar por n&uacute;mero de semana</h3>
-                <label for="semanaAnual">Seleccione n&uacute;mero de semana</label> 
-                <input id= "semanaAnual" name="semanaAnual" class="form-control" type="text"/>
+            <h3>Seleccione un filtro de busqueda</h3>           
+            
+            <div class="radio">
+                    <label>           
+                      <h4><input type="radio" name="radio" id="fechaRadio" value="fechaRadio"> Buscar citas por rango de fecha</h4>
+                    </label>
             </div>
-                <br>
-                <!--<div class="form-group" >
-                    <h3>Buscar por mes</h3>
-                    <label for="mes">Seleccione un mes</label> 
-                    <select class="form-control" id="mes" name="mes">
-                      <option value="ENE">Enero</option>
-                      <option value="FEB">Febrero</option>
-                      <option value="MAR">Marzo</option>
-                      <option value="ABR">Abril</option>
-                      <option value="MAY">Mayo</option>
-                      <option value="JUN">Junio</option>
-                      <option value="JUL">Julio</option>
-                      <option value="AGO">Agosto</option>
-                      <option value="SEP">Septiembre</option>
-                      <option value="OCT">Octubre</option>        
-                      <option value="NOV">Noviembre</option>
-                      <option value="DIC">Diciembre</option>                         
-                    </select> 
-                  <br>
-                  <h3>Buscar por semana</h3>
-                  <div class="form-group" >
-                     <label for="fecha">Seleccione una fecha</label>
-                     <input id = "fecha" type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
-                     <%= '<scr'+'ipt>' %>
-                     $('#fecha').datepicker({autoclose:true});
-                     $('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= sesion.get('fecha') %>"));
-                     <%= '</scr'+'ipt>' %>
-                 </div>-->
+            <div class="form-group" >          
+                <label for="fecha">Seleccione un rango de fecha</label>
+                <input id = "fecha" type="text" class="form-control" size="30" name="fecha" placeholder="Enter value"  />
+            </div>
+    
+            <div class="radio">
+                    <label>           
+                      <h4><input type="radio" name="radio" id="monitorRadio" value="monitorRadio"> Buscar citas por monitor</h4>
+                    </label>
+            </div>
+            <div class="form-group" >                
+                <label for="monitor">Seleccione un monitor</label>
+                <select class="form-control" name = "monitorId" id = "opcionesMonitor"></select>
+            </div>
+    
+            <div class="radio">
+                    <label>           
+                      <h4><input type="radio" name="radio" id="estudiateRadio" value="estudianteRadio"> Buscar citas por estudiante</h4>
+                    </label>
+            </div>
+            <div class="form-group" >               
+                <label for="estudiante">Ingrese el nombre del estudiante</label>
+                <input id= "estudiante" name="estudiante" class="form-control" type="text"/>
+            </div>
+    
+            <div class="radio">
+                    <label>           
+                      <h4><input type="radio" name="radio" id="estadoRadio" value="estadoRadio"> Buscar citas por estado</h4>
+                    </label>
+            </div>
+            <div class="form-group">                
+                <label for="estado">Seleccione un estado</label>
+                <select class="form-control" name ="estado" id = "estado">
+                <option value="asignada">Asignada</option>
+                <option value="realizada">Realizada</option>
+                <option value="cancelada">Cancelada</option>
+                <option value="sancionada">Sancionada</option>
+                </select>           
+            </div>
+    
+            <br>
+            <br>
+
         </form>
     </div>
 </script> 

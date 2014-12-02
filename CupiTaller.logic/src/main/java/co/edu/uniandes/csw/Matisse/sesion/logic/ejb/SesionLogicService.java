@@ -52,10 +52,6 @@ public class SesionLogicService extends _SesionLogicService implements ISesionLo
         return persistance.darEstadisticaPorFechas(fInicial,fFinal);
     }
 
-    public SesionPageDTO getSesionesSemana(Integer page, Integer maxRecords, Integer semana) {
-        return persistance.darSesionesPorSemana(page,maxRecords,semana);
-    }
-
     public SemanaDTO darEstadisticaPorMonitor(Integer monitor,Date fInicial,Date fFinal) {
         return persistance.estadisticasMonitor(monitor,fInicial,fFinal);
     }
@@ -63,6 +59,22 @@ public class SesionLogicService extends _SesionLogicService implements ISesionLo
     public byte[] getReport() {
 
         return persistance.getReport();
+    }
+
+    public SesionPageDTO getSesionesFecha(Integer page, Integer maxRecords, Date fInicio, Date fFinal) {
+        return persistance.darSesionesPorFecha(page,maxRecords,fInicio,fFinal);
+    }
+
+    public SesionPageDTO getSesionesMonitor(Integer page, Integer maxRecords, Integer monitorId) {
+        return persistance.darSesionesPorMonitor(page,maxRecords,monitorId);
+    }
+
+    public SesionPageDTO getSesionesEstudiante(Integer page, Integer maxRecords, String estudiante) {
+        return persistance.darSesionesPorEstudiante(page,maxRecords,estudiante);
+    }
+
+    public SesionPageDTO getSesionesEstado(Integer page, Integer maxRecords, String estado) {
+        return persistance.darSesionesPorEstado(page,maxRecords,estado);
     }
 
 }

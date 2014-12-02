@@ -91,24 +91,7 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
         semana.setValue(values);
         return semana;
     }
-
-    public SesionPageDTO darSesionesPorSemana(Integer page, Integer maxRecords, Integer semana) {
-        Query count = entityManager.createQuery("select count(u) from SesionEntity u where u.semanaAnual = ?1");
-        count.setParameter(1, semana);
-        Long regCount = 0L;
-        regCount = Long.parseLong(count.getSingleResult().toString());
-        Query q = entityManager.createQuery("select u from SesionEntity u where u.semanaAnual = ?1");
-        q.setParameter(1, semana);
-        if (page != null && maxRecords != null) {
-            q.setFirstResult((page - 1) * maxRecords);
-            q.setMaxResults(maxRecords);
-        }
-        SesionPageDTO response = new SesionPageDTO();
-        response.setTotalRecords(regCount);
-        response.setRecords(SesionConverter.entity2PersistenceDTOList(q.getResultList()));
-        return response;
-    }
-
+    
     public SemanaDTO estadisticasMonitor(Integer monitor,Date fInicial,Date fFinal) {
         String name = (String)entityManager.createNativeQuery("select name from MONITORENTITY where id = ? ").setParameter(1, monitor).getSingleResult();
         String query = "select dis.label, COALESCE(co.value,0) as value from ((select distinct(estado) as label from SESIONENTITY)dis left join (select estado as label, count(estado) as value from SESIONENTITY where monitorid = ? and fecha between ? and ? group by estado order by estado)co on dis.label=co.label)";
@@ -155,5 +138,74 @@ public class SesionPersistence extends _SesionPersistence implements ISesionPers
     
     private String darNombreSerie(Date inicio, Date fin){
         return inicio.equals(fin)?dateToString(inicio):dateToString(inicio)+" - "+dateToString(fin);
+    }
+
+    public SesionPageDTO darSesionesPorFecha(Integer page, Integer maxRecords, Date fInicio, Date fFinal) {
+        Query count = entityManager.createQuery("select count(u) from SesionEntity u where u.fecha between ?1 and ?2");
+        count.setParameter(1, fInicio,TemporalType.TIMESTAMP);
+        count.setParameter(2, fFinal,TemporalType.TIMESTAMP);
+        Long regCount = 0L;
+        regCount = Long.parseLong(count.getSingleResult().toString());
+        Query q = entityManager.createQuery("select u from SesionEntity u where u.fecha between ?1 and ?2");
+        q.setParameter(1, fInicio,TemporalType.TIMESTAMP);
+        q.setParameter(2, fFinal,TemporalType.TIMESTAMP);
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        SesionPageDTO response = new SesionPageDTO();
+        response.setTotalRecords(regCount);
+        response.setRecords(SesionConverter.entity2PersistenceDTOList(q.getResultList()));
+        return response;
+    }
+
+    public SesionPageDTO darSesionesPorMonitor(Integer page, Integer maxRecords, Integer monitorId) {
+        Query count = entityManager.createQuery("select count(u) from SesionEntity u where u.monitorId = ?1");
+        count.setParameter(1, monitorId);
+        Long regCount = 0L;
+        regCount = Long.parseLong(count.getSingleResult().toString());
+        Query q = entityManager.createQuery("select u from SesionEntity u where u.monitorId = ?1");
+        q.setParameter(1, monitorId);
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        SesionPageDTO response = new SesionPageDTO();
+        response.setTotalRecords(regCount);
+        response.setRecords(SesionConverter.entity2PersistenceDTOList(q.getResultList()));
+        return response;
+    }
+
+    public SesionPageDTO darSesionesPorEstudiante(Integer page, Integer maxRecords, String estudiante) {
+        Query count = entityManager.createNativeQuery("select count(*) from SesionEntity u inner join EstudianteEntity b on u.estudianteid=b.id where b.name like ?1");
+        count.setParameter(1, "%"+estudiante+"%");
+        Long regCount = 0L;
+        regCount = Long.parseLong(count.getSingleResult().toString());
+        Query q = entityManager.createQuery("select u from SesionEntity u where u.estudianteId in (select b.id from EstudianteEntity b where b.name like ?1)");
+        q.setParameter(1, "%"+estudiante+"%");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        SesionPageDTO response = new SesionPageDTO();
+        response.setTotalRecords(regCount);
+        response.setRecords(SesionConverter.entity2PersistenceDTOList(q.getResultList()));
+        return response;}
+
+    public SesionPageDTO darSesionesPorEstado(Integer page, Integer maxRecords, String estado) {
+        Query count = entityManager.createQuery("select count(u) from SesionEntity u where u.estado = ?1");
+        count.setParameter(1, estado);
+        Long regCount = 0L;
+        regCount = Long.parseLong(count.getSingleResult().toString());
+        Query q = entityManager.createQuery("select u from SesionEntity u where u.estado = ?1");
+        q.setParameter(1, estado);
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        SesionPageDTO response = new SesionPageDTO();
+        response.setTotalRecords(regCount);
+        response.setRecords(SesionConverter.entity2PersistenceDTOList(q.getResultList()));
+        return response;
     }
 }
