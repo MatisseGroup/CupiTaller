@@ -138,11 +138,6 @@ define(['controller/_sesionController', 'delegate/sesionDelegate'], function () 
 							$.each(data["records"], function( index, value ) {
   							$("#opcionesMonitor").append('<option value="'+value["id"]+'">'+value["name"]+'</option>');
 							});
-								// var option = document.createElement("option");
-								// option.text = data["records"][i]["name"];
-								// option.value = data["records"][i]["id"];
-								// var select = document.getElementById("opcionesMonitor");
-								// select.appendChild(option); 
 						}
 					});
 				},

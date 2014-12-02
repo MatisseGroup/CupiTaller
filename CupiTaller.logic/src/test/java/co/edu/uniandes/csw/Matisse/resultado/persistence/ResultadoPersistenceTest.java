@@ -28,11 +28,20 @@
 
 package co.edu.uniandes.csw.Matisse.resultado.persistence;
 
+import co.edu.uniandes.csw.Matisse.API.ServiciosAPI;
+import co.edu.uniandes.csw.Matisse.pregunta.logic.dto.PreguntaDTO;
+import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
+import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoPageDTO;
+import co.edu.uniandes.csw.Matisse.resultado.persistence.api.IResultadoPersistence;
+import co.edu.uniandes.csw.Matisse.resultado.persistence.converter.ResultadoConverter;
+import co.edu.uniandes.csw.Matisse.resultado.persistence.entity.ResultadoEntity;
+import static co.edu.uniandes.csw.Matisse.util._TestUtil.*;
+import java.util.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-
+import org.codehaus.jettison.json.JSONObject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -41,15 +50,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import java.util.*;
-
-
-import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoPageDTO;
-import co.edu.uniandes.csw.Matisse.resultado.logic.dto.ResultadoDTO;
-import co.edu.uniandes.csw.Matisse.resultado.persistence.api.IResultadoPersistence;
-import co.edu.uniandes.csw.Matisse.resultado.persistence.entity.ResultadoEntity;
-import co.edu.uniandes.csw.Matisse.resultado.persistence.converter.ResultadoConverter;
-import static co.edu.uniandes.csw.Matisse.util._TestUtil.*;
 
 @RunWith(Arquillian.class)
 public class ResultadoPersistenceTest {
@@ -172,7 +172,52 @@ public class ResultadoPersistenceTest {
 		
 		Assert.assertEquals(dto.getName(), resp.getName());	
 	}
+        
+        @Test
+        public void obtenerPregunaDe4API(){
+            ServiciosAPI lm = ServiciosAPI.getInstance();
+            JSONObject array = lm.getQuestionsProperties(3);
+            Assert.assertNotNull(array);
+        }
+        
+        
+        @Test
+        public void obtenerRespuestas(){
+            ServiciosAPI lm = ServiciosAPI.getInstance();
+            Assert.assertNotNull(lm.exportResponses());
+        }
+        
+        
+        @Test
+        public void obtenerGrupos(){
+            ServiciosAPI lm = ServiciosAPI.getInstance();
+            Assert.assertNotNull(lm.listGroups(ResultadoPersistence.ID_SURVEY));
+        }
+        
+        @Test
+        public void obtenerPreguntasGrupo(){
+            ServiciosAPI lm = ServiciosAPI.getInstance();
+            Assert.assertNotNull(lm.listQuestions(ResultadoPersistence.ID_SURVEY, 6));
+        }
+        
+        @Test
+        public void obtenerPreguntaDe5(){
+            PreguntaDTO preg = resultadoPersistence.respuestaA(11);
+            Assert.assertNotNull(preg);
+        }
 	
+        @Test
+        public void obtenerPreguntaDe4(){
+            PreguntaDTO preg = resultadoPersistence.respuestaA(1);
+            Assert.assertNotNull(preg);
+        }
+        
+        @Test
+        public void obtenerListaPreguntas(){
+            List<PreguntaDTO> pregus = resultadoPersistence.listarPreguntas();
+            Assert.assertNotNull(pregus);
+        }
+        
 	@Test
 	public void getResultadoPaginationTest(){
 		//Page 1

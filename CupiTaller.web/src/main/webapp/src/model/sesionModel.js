@@ -31,11 +31,16 @@ define(['model/_sesionModel'], function() {
  	validate: function(attrs,options){
             var validationMessage = "";
             var regExp ="^[0-9]+$"; 
-            if(!attrs.name){
-                validationMessage = "El nombre no puede ser vacio";
+            if(attrs.monitor.length == 0){
+                validationMessage = "No pueden estar los campos vacios";
             }
+            
+//            else if (attrs.semanaAnual&&attrs.monitor)
+//            {
+//                validationMessage = "No puede llenar los dos campos";
+//            }
             else if(!attrs.semanaAnual.match(regExp)){
-              validationMessage="La semana debe ser numérica y sin decimales";
+              validationMessage="La semana debe ser numerica y sin decimales";
             }
             if(attrs.semanaAnual <=0 ){
               validationMessage = "La semana debe ser mayor a cero";
@@ -43,7 +48,7 @@ define(['model/_sesionModel'], function() {
             if(validationMessage.length>0){
                return validationMessage;
             }
-
+            
         }
 
     });

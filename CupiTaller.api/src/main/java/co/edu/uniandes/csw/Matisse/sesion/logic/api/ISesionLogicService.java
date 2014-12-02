@@ -39,7 +39,7 @@ public interface ISesionLogicService extends _ISesionLogicService {
     public SemanaDTO darEstadisticaPorMonitor(Integer monitor,Date fInicial,Date fFinal);
 
     public byte[] getReport();
-
+    
     public SesionPageDTO getSesionesFecha(Integer page, Integer maxRecords, Date fInicio, Date fFinal);
 
     public SesionPageDTO getSesionesMonitor(Integer page, Integer maxRecords, Integer monitorId);

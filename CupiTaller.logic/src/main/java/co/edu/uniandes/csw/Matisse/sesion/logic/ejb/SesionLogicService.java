@@ -55,7 +55,7 @@ public class SesionLogicService extends _SesionLogicService implements ISesionLo
     public SemanaDTO darEstadisticaPorMonitor(Integer monitor,Date fInicial,Date fFinal) {
         return persistance.estadisticasMonitor(monitor,fInicial,fFinal);
     }
-
+    
     public byte[] getReport() {
 
         return persistance.getReport();

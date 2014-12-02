@@ -42,7 +42,6 @@ define(['delegate/_sesionDelegate'], function() {
          },
          
          darSesionesPorMonitor: function(sesion, callback, callbackError) {
-              console.log('Sesion Delegate entro ');
               $.ajax({
                   url: '/CupiTaller.web/webresources/Sesion/sesionesPorMonitor',
                   type: 'GET',
